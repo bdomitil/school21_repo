@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 00:38:52 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/07 11:29:43 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 14:25:25 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		ft_isalnum(int q);
 int		ft_toupper(int q);
 int		ft_tolower(int q);
 int		ft_atoi(const char *str);
+int		ft_char_index(const char *str, char q);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
