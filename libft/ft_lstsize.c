@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/04 04:52:10 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/07 22:19:25 by bdomitil         ###   ########.fr       */
+/*   Created: 2020/11/07 23:06:37 by bdomitil          #+#    #+#             */
+/*   Updated: 2020/11/07 23:39:21 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int ft)
+int	ft_lstsize(t_list *lst)
 {
-	char q;
+	int		size;
+	t_list	*temp_next;
 
-	q = 0;
-	if (n == -2147483648)
+	size = 0;
+	if (!lst)
+		return (0);
+	while (lst != NULL)
 	{
-		write(ft, "-2147483648", 11);
-		return ;
+		temp_next = lst->next;
+		lst = temp_next;
+		size++;
 	}
-	if (n < 0)
-	{
-		n *= -1;
-		write(ft, "-", 1);
-	}
-	if (n > 0)
-	{
-		q = n % 10 + 48;
-		if (n / 10 > 0)
-			ft_putnbr_fd(n / 10, ft);
-		write(ft, &q, 1);
-	}
-	if (n == 0)
-		write(ft, "0", 1);
+	return (size);
 }
