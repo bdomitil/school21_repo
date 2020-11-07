@@ -6,15 +6,28 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 04:58:09 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/10/30 19:39:43 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 11:46:15 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	g_sym;
+
+static int	is_sym(char q)
+{
+	if (q == '-' || q == '+')
+	{
+		g_sym++;
+		return (1);
+	}
+	else
+		return (0);
+}
+
 static int	enter(char q)
 {
-	if (ft_isdigit(q) || q == '-' || q == '+' || ft_space(q))
+	if (ft_isdigit(q) || is_sym(q) || ft_space(q))
 		return (1);
 	else
 		return (0);
@@ -23,28 +36,25 @@ static int	enter(char q)
 int			ft_atoi(const char *str)
 {
 	int to_ret;
-	int sym;
 	int min;
 	int i;
 
 	to_ret = 0;
 	min = 0;
-	sym = 0;
+	g_sym = 0;
 	i = 0;
-	while (enter(str[i]))
+	while (enter(str[i]) && g_sym < 2)
 	{
 		if (str[i] == '-')
 			min++;
-		if (str[i] == '+' || str[i] == '-')
-			sym++;
 		if (ft_isdigit((int)str[i]) == 1)
 			to_ret = (to_ret * 10) + ((int)str[i] - 48);
-		if ((i > 18 && min > 0) || sym > 1)
+		if ((i > 18 && min > 0))
 			return (0);
 		else if (i++ > 18)
 			return (-1);
 	}
-	if (sym > 0)
+	if (min > 0)
 		return (to_ret * -1);
 	return (to_ret);
 }

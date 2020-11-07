@@ -6,13 +6,13 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 13:55:41 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/03 07:10:47 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 11:25:42 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	int				i;
 	unsigned char	*mdst;

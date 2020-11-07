@@ -6,13 +6,13 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 04:02:29 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/04 04:07:49 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 12:08:26 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strmapi(const char *str, char (*f) (unsigned int, char))
+char	*ft_strmapi(const char *str, char (*f) (unsigned int, char))
 {
 	size_t	size;
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 18:01:15 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/06 18:01:25 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 11:57:58 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putchar_fd(char c, int ft)
 {
-	unsigned char q = (unsigned char)c;
+	unsigned char q;
+
+	q = (unsigned char)c;
 	write(ft, &q, 1);
 }

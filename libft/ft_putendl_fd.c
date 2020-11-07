@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 05:54:32 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/04 06:08:30 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/07 11:59:43 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putendl_fd(char *str, int ft)
 	int				len;
 	unsigned char	q;
 	int				i;
-	
+
 	if (!str)
 		return ;
 	i = 0;
@@ -25,7 +25,7 @@ void	ft_putendl_fd(char *str, int ft)
 	while (i < len)
 	{
 		q = (unsigned char)str[i++];
-		write(ft , &q, 1);
+		write(ft, &q, 1);
 	}
-	write (ft, "\n", 1);
+	write(ft, "\n", 1);
 }
