@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 00:38:52 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/07 23:55:38 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:15:11 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
+void				ft_lstprint(t_list **lst);
 
 #endif

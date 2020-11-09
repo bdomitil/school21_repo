@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   test_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 23:53:01 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/09 13:57:20 by bdomitil         ###   ########.fr       */
+/*   Created: 2020/11/09 13:08:29 by bdomitil          #+#    #+#             */
+/*   Updated: 2020/11/09 13:58:14 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int main()
 {
-	t_list *temp;
-
-	temp = lst[0];
-	if (temp)
-		while (temp)
+	int i = 0;
+	t_list mass[5];
+	t_list *temp = mass;
+	t_list ska;
+	ska.next = NULL;
+	ska.content = "pizds suka";
+	while (i < 5)
+	{
+		if (i == 4)
 		{
-			if (temp->next == NULL)
-			{
-				temp->next = new;
-				break ;
-			}
-			temp = temp->next;
+			mass[4].next = NULL;
+			mass[4].content = ft_itoa(i);
+			break;
 		}
-	else
-		lst[0] = new;
+		mass[i].next = &mass[i + 1];
+		mass[i].content = ft_itoa(i);
+		i++;
+	}
+	ft_lstprint(&temp);
 }

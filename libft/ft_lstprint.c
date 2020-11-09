@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 23:53:01 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/09 13:57:20 by bdomitil         ###   ########.fr       */
+/*   Created: 2020/11/09 12:58:03 by bdomitil          #+#    #+#             */
+/*   Updated: 2020/11/09 13:44:05 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstprint(t_list **lst)
 {
-	t_list *temp;
-
-	temp = lst[0];
-	if (temp)
-		while (temp)
-		{
-			if (temp->next == NULL)
-			{
-				temp->next = new;
-				break ;
-			}
-			temp = temp->next;
-		}
-	else
-		lst[0] = new;
+	while (lst[0])
+	{
+		printf ("%s\n", lst[0]->content);
+		lst[0] = lst[0]->next;	
+	}
 }
