@@ -19,7 +19,8 @@ files.c = ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 					ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c  ft_islower.c  \
                     libft.h ft_char_index.c ft_isupper.c ft_space.c ft_strcmp.c
 
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c	ft_lstadd_back.c
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c	ft_lstadd_back.c ft_lstadd_back.c \
+		ft_lstdelone.c ft_lstclear.c
 
 bonus.o = $(BONUS:.c=.o)
 
