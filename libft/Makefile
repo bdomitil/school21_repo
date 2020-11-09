@@ -6,7 +6,7 @@
 #    By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 09:40:08 by bdomitil          #+#    #+#              #
-#    Updated: 2020/11/07 23:57:23 by bdomitil         ###   ########.fr        #
+#    Updated: 2020/11/09 19:28:03 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ files.c = ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
                     libft.h ft_char_index.c ft_isupper.c ft_space.c ft_strcmp.c
 
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c	ft_lstadd_back.c ft_lstadd_back.c \
-		ft_lstdelone.c ft_lstclear.c
+		ft_lstdelone.c ft_lstclear.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 bonus.o = $(BONUS:.c=.o)
 
