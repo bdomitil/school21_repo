@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 00:38:52 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/09 13:15:11 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/09 14:26:01 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void				ft_putnbr_fd(int n, int fd);
 t_list				*ft_lstnew(void *content);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_front(t_list **lst, t_list *new);
-void				ft_lstadd_back(t_list **lst, t_list *new);
 void                ft_lstadd_back(t_list **lst, t_list *new);
 void                ft_lstclear(t_list **lst, void (*del)(void*));
 void                ft_lstdelone(t_list *lst, void(*del)(void*));
