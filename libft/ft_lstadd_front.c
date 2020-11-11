@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 22:00:31 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/07 23:14:59 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:00:34 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	
 	if (!new)
 		return ;
 	new->next = lst[0];

@@ -6,13 +6,13 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 20:10:19 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/09 19:17:28 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:02:43 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void	*content)
+t_list	*ft_lstnew(void *content)
 {
 	t_list *new_list;
 

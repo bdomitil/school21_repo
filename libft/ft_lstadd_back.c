@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 14:13:22 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/09 19:27:33 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:40:32 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list *temp;
 
-	temp = *lst;
-	if (!temp)
+	if (*lst == NULL)
 	{
-		lst[0] = new;
+		*lst = new;
 		return ;
 	}
-	while (temp != NULL)
-	{
-		if (temp->next == NULL)
-		{
-			temp->next = new;
-			return ;
-		}
-		temp = temp->next;
-	}
+	temp = ft_lstlast(lst[0]);
+	temp->next = new;
 }
