@@ -6,7 +6,7 @@
 #    By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 09:40:08 by bdomitil          #+#    #+#              #
-#    Updated: 2020/11/11 17:02:10 by bdomitil         ###   ########.fr        #
+#    Updated: 2020/11/22 21:51:59 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ files.c = ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 					ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
 					ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
 					ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c  ft_islower_bonus.c  \
-                    libft.h ft_char_index_bonus.c ft_isupper_bonus.c ft_space_bonus.c ft_strcmp_bonus.c
+                    ft_char_index_bonus.c ft_isupper_bonus.c ft_space_bonus.c ft_strcmp_bonus.c
 
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c	ft_lstadd_back.c ft_lstadd_back.c \
-		ft_lstdelone.c ft_lstclear.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c	ft_lstadd_back.c \
+		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 bonus.o = $(BONUS:.c=.o)
 
@@ -33,19 +33,24 @@ NAME = libft.a
 all :	$(NAME)
 
 $(NAME) : $(files.o)
-		ar -rcs libft.a $(files.o)
+		@ar -rcs libft.a $(files.o)
+		@echo "\033[7m lib is compiled!\033[0m"
 
 bonus :  $(files.o) $(bonus.o)
-		ar -rcs $(NAME) $(files.o) $(bonus.o) 
+		@ar -rcs $(NAME) $(files.o) $(bonus.o)
+		@echo "\033[7m lib is compiled!\033[0m"
 
 %.o : %.c 
-		gcc -g -Wall -Wextra -Werror -c  $<  -o $@ 
+		@gcc -g -Wall -Wextra -Werror -c  $<  -o $@
+		@echo "\033[36m$<\033[0m \033[35m is compiled!\033[0m"
 
 clean :  
-		rm -f *.o
+		@rm -f *.o
+		@echo "\033[7mclean is done!\033[0m"
 
-fclean :	clean
-		rm  -f $(NAME)
+fclean :
+		@rm  -f *.o $(NAME)
+		@echo "\033[7mfclean is done!\033[0m"
 
 re	:  fclean libft.a	
 

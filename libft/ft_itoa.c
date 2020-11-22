@@ -6,54 +6,53 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 23:06:12 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/04 03:56:12 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/18 18:06:01 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*g_to_ret;
-static size_t	g_size;
-static int		g_minus;
-
-static size_t	count_len(int n)
+static size_t	count_len(int n, int *minus)
 {
-	size_t size1;
+	size_t size;
 
-	size1 = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		*minus = 1;
+	size = 0;
 	while (n != 0)
 	{
-		size1++;
+		size++;
 		n /= 10;
 	}
-	return (size1);
+	return (size);
 }
 
 char			*ft_itoa(int n)
 {
-	g_size = count_len(n);
-	g_to_ret = NULL;
+	char	*to_ret;
+	size_t	size;
+	int		minus;
+
 	if (n == -2147483648)
-		return ((g_to_ret = ft_strdup("-2147483648")));
-	g_minus = 0;
-	if (n < 0)
-		g_minus = 1;
-	if (n == 0)
-		g_size = 1;
-	g_to_ret = malloc(g_size * sizeof(char) + 1 + g_minus);
-	if (!g_to_ret)
+		return ((to_ret = ft_strdup("-2147483648")));
+	minus = 0;
+	size = count_len(n, &minus);
+	to_ret = malloc(size * sizeof(char) + 1 + minus);
+	if (!to_ret)
 		return (NULL);
-	if (g_minus)
+	if (minus)
 	{
 		n *= -1;
-		g_to_ret[0] = '-';
+		to_ret[0] = '-';
 	}
-	g_to_ret[g_size + g_minus] = '\0';
-	while (g_size > (size_t)0)
+	to_ret[size + minus] = '\0';
+	while (size > 0)
 	{
-		g_to_ret[g_size - !g_minus] = n % 10 + 48;
+		to_ret[size - !minus] = n % 10 + 48;
 		n = n / 10;
-		g_size--;
+		size--;
 	}
-	return (g_to_ret);
+	return (to_ret);
 }

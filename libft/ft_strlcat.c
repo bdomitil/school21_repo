@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 01:51:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/03 11:17:53 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/18 18:29:59 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	i = 0;
 	dpos = ft_strlen(dst);
 	spos = ft_strlen(src);
-	if (size <= ft_strlen(dst))
+	if (size < ft_strlen(dst))
 		res = size + spos;
 	else
 		res = spos + dpos;
