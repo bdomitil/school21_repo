@@ -6,7 +6,7 @@
 /*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 20:01:04 by bdomitil          #+#    #+#             */
-/*   Updated: 2020/11/18 18:11:46 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/26 08:22:57 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (*str++)
 		i++;
 	return (i);
 }

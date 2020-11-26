@@ -23,8 +23,9 @@ static	int		count_word(const char *str, char q)
 	num = 0;
 	while (str[i] == q && str[i] != '\0')
 		i++;
-	while (str[stop] == q && stop >= 0)
-		stop--;
+	if (stop >= 0)
+		while (str[stop] == q && stop >= 0)
+			stop--;
 	while (i < stop)
 	{
 		if (str[i] == q && str[i + 1] != q)
@@ -78,7 +79,7 @@ char			**ft_split(const char *str, char q)
 	if (!str)
 		return (NULL);
 	word_num = count_word(str, q);
-	to_ret = malloc(word_num * sizeof(char*) + 1);
+	to_ret = malloc((word_num + 1) * sizeof(char*));
 	if (!to_ret)
 		return (NULL);
 	while (i < word_num)

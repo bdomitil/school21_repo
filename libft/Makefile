@@ -6,7 +6,7 @@
 #    By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 09:40:08 by bdomitil          #+#    #+#              #
-#    Updated: 2020/11/22 21:51:59 by bdomitil         ###   ########.fr        #
+#    Updated: 2020/11/26 08:33:10 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ bonus :  $(files.o) $(bonus.o)
 		@echo "\033[7m lib is compiled!\033[0m"
 
 %.o : %.c 
-		@gcc -g -Wall -Wextra -Werror -c  $<  -o $@
+		@gcc -g -Wall -Wextra -Werror  -c  $<  -o $@
 		@echo "\033[36m$<\033[0m \033[35m is compiled!\033[0m"
 
 clean :  
