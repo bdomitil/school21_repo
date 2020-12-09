@@ -43,25 +43,6 @@ int		clear_and_ret(t_list **lst, t_list *curr)
 	return (0);
 }
 
-void	ft_lstclear(t_list **lst)
-{
-	t_list *temp;
-
-	if (lst[0] == NULL)
-		return ;
-	else
-	{
-		temp = lst[0];
-		while (temp)
-		{
-			lst[0] = lst[0]->next;
-			free(temp->left);
-			free(temp);
-			temp = lst[0];
-		}
-	}
-}
-
 int		get_line(t_list *curr)
 {
 	int		read_res;
