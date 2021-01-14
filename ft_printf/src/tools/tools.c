@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 09:11:02 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/01/14 16:51:28 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/01/14 19:05:19 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		count_accuracy(t_pr_lst *lst, char *str)
 		to_ret = str_len;
 	else if (acc.found && acc.data > 0)
 		to_ret = acc.data;
-	else if (acc.found && lst->type != p)
+	else if (acc.found && lst->type != p && lst->type != percent)
 		to_ret = 0;
 	else if (acc.found && lst->type == p && !ft_strcmp(lst->content, "0x0"))
 		to_ret = 2;

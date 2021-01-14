@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 12:35:35 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/01/14 17:29:50 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/01/14 19:01:37 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		final_print(void)
 	{
 		ft_print(tmp->str_before);
 		type = tmp->type;
-		if (type != s && type != c && type != p)
+		if (type != s && type != c && type != p && type != percent)
 			print_num(tmp, tmp->content);
 		else
 			print_str(tmp, tmp->content);
