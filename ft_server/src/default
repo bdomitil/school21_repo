@@ -1,0 +1,66 @@
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name default_server;
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 443 ssl default_server;
+	listen [::]:443 ssl default_server;
+
+	ssl on;
+	ssl_certificate /etc/ssl/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/nginx-selfsigned.key;
+	
+	server_name default_server;
+	
+	autoindex off;
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		root /var/www/html;
+		index index.html;
+		try_files $uri $uri/ =404;
+	}
+
+	location /site1/ {
+		root /var/www/html;
+		index index.html;	
+		try_files $uri $uri/ =500;
+	}
+	
+	location /site2/ {
+		root /var/www/html;
+		index index.html;
+		try_files $uri $uri/ =500;
+	}
+
+	location /phpMyAdmin/ {
+    root /var/www/html;
+    index index.php;
+    location ~ \.php$ {
+                    fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+                    fastcgi_index index.php;
+                    fastcgi_param SCRIPT_FILENAME $request_filename;
+                    include fastcgi_params;
+                    fastcgi_ignore_client_abort off;
+            }
+    try_files $uri $uri/ =402;
+    }
+
+	location /phpmyadmin/ {
+    root /var/www/html;
+    index index.php;
+    location ~ \.php$ {
+                    fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+                    fastcgi_index index.php;
+                    fastcgi_param SCRIPT_FILENAME $request_filename;
+                    include fastcgi_params;
+                    fastcgi_ignore_client_abort off;
+            }
+    try_files $uri $uri/ =402;
+    }
+
+}
