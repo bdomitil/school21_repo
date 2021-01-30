@@ -2,12 +2,16 @@ s#!/bin/sh
 mkdir /usr/share/
 mkdir /tmp/phpMyAdmin
 chmod 733 /tmp/phpMyAdmin
+mv wordpress/wp-config-sample.php wordpress/wp-config.php
 apt install procps -y
 ps aux | grep nginx
 ps aux | grep mysql
 cat default > /etc/nginx/sites-enabled/default
 mv site1 site2 phpMyAdmin /var/www/html/;
+ln -s /var/www/html/phpMyAdmin /var/www/html/phpmyadmin;
 mv /var/www/html/index.nginx-debian.html  /var/www/html/index.html
+mv wordpress /var/www/wordpress
+chown -R www-data:www-data /var/www/wordpress
 service mysql start
 echo "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';" | mysql -u root --skip-password
 echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
