@@ -16,7 +16,16 @@ server {
 	
 	server_name default_server;
 	
+	error_page 404 /response_page;
+        location = /response_page {
+        root /var/www/html;
+        index index.html;
+        }
+
 	autoindex off;
+	root /var/www/html;
+	index index.html;
+	
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
@@ -72,5 +81,6 @@ server {
                     include fastcgi_params;
                     fastcgi_ignore_client_abort off;
             }
+		try_files $uri $uri/ =404;
 	}
 }
