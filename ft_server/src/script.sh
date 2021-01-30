@@ -1,6 +1,7 @@
 s#!/bin/sh
 mkdir /usr/share/
 mkdir /tmp/phpMyAdmin
+chmod 733 /tmp/phpMyAdmin
 apt install procps -y
 ps aux | grep nginx
 ps aux | grep mysql
@@ -13,6 +14,7 @@ echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
 echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';" | mysql -u root --skip-password
 echo "FLUSH PRIVILEGES;" | mysql --skip-password
 openssl req -x509 -nodes -days 365 -subj "/C=KR/ST=Korea/L=Seoul/O=innoaca/OU=42seoul/CN=forhjy" -newkey rsa:2048 -keyout /etc/ssl/nginx-selfsigned.key -out /etc/ssl/nginx-selfsigned.crt
+curl -s https://api.wordpress.org/secret-key/1.1/salt/ > /var/www/wordpress/define_keys.txt
 service php7.3-fpm start
 service nginx start 
 bash
