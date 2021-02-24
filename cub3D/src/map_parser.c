@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:45 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 21:21:25 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:26:58 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void parse_line (char *str)
 }
 static void parse_map(int fd)
 {
-	
+	printf("\nREADY TO PARSE MAP\n");
 }
 bool map_parser(char *file_name)
 {
