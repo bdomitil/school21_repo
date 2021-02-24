@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 00:38:52 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 20:06:52 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/24 20:53:27 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 int				get_next_line(int fd, char **line);
 int				ft_isempty_str(char *str);
 long long int	ft_atoi_long(const char *str);
+int				ft_all_numeric(char *str);
 
 #endif

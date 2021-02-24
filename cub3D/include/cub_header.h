@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 19:52:18 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:20:36 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ typedef enum	e_errors
 	INVALID_NUMBER_OF_ARGS,
 	ERROR_MAP_OPENING,
 	INVALID_MAP,
-	INVALID_RESOLUTION
+	INVALID_RESOLUTION,
+	INVALID_PATH,
+	INVALID_COLOR
 }				t_errors;
+
 static char	*g_cust_errors[] = {"INVALID_NUMBER_OF_ARGUMENTS",
-	"ERROR IN OPENING MAP", "INVALID MAP", "INVALID RESOLUTION"};
+	"ERROR IN OPENING MAP", "INVALID MAP", "INVALID RESOLUTION",
+	"ERROR IN PATH TO SOMETHING IN CONFIG", "INVALID COLOR"};
 /*end of part*/
 
 typedef struct	s_config
@@ -57,7 +61,7 @@ typedef enum e_red_in_map
 	c,
 	map,
 	empty
-}	t_red_in_map;
+}	t_read_in_map;
 
 
 /*end of part*/
@@ -66,6 +70,8 @@ bool	map_parser(char *file_name);
 void	print_cust_error(t_errors error);
 void	init_glob_vars();
 void	parse_resolution(char *str);
+void	parse_pathes(char *str, t_read_in_map readInmap);
+void	parse_color(char *str, t_read_in_map readInmap);
 
 /*global variables here*/
 int g_ready_to_read_map;
@@ -75,8 +81,8 @@ any other means not */
 t_config g_config;
 /*global struct of config */
 
-static char *g_valid_start[] = {"R", "NO", "SO", "WE",
-	"EA", "S", "F", "C" , "\n"};
+static char *g_valid_start[] = {"R ", "NO ", "SO ", "WE ",
+	"EA ", "S ", "F ", "C " , "\n"};
 /*it is need to compare with what we read in map*/
 
 
