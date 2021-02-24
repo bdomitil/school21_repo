@@ -6,11 +6,11 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/02/22 23:54:19 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/02/24 19:38:50 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-files.c = src/cub_utils1.c src/map_parser.c
+files.c = src/cub_utils1.c src/map_parser.c src/parse_utils.c
 
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g 
