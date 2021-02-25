@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 21:09:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/24 22:28:00 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,13 @@ void	parse_color(char *str, t_read_in_map readinmap)
 	if (i != 3)
 		print_cust_error(INVALID_COLOR);
 	while (j < 3)
-	{
-		if (!ft_all_numeric(splited_str[j]) || (temp = ft_atoi_long(splited_str[j])) 
-		> 255 || temp < 0)
+		if (!ft_all_numeric(splited_str[j]) ||
+		(temp = ft_atoi_long(splited_str[j])) > 255 || temp < 0)
 			print_cust_error(INVALID_COLOR);
-		if (readinmap == c)
-			g_config.c_color[j] = temp;
-		if (readinmap == f)
-			g_config.c_color[j] = temp;
-		j++;
-	}
+		else if (readinmap == c)
+			g_config.c_color[j++] = temp;
+		else if (readinmap == f)
+			g_config.c_color[j++] = temp;
 	while (--i >= 0)
 		free(splited_str[i]);
 	free(splited_str);

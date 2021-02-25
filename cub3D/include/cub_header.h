@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 21:20:36 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/25 16:25:39 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef enum e_red_in_map
 
 /*end of part*/
 
-bool	map_parser(char *file_name);
+bool	config_parser(char *file_name);
 void	print_cust_error(t_errors error);
 void	init_glob_vars();
 void	parse_resolution(char *str);

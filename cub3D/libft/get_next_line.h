@@ -6,14 +6,14 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 02:52:30 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/23 00:05:19 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/25 16:51:00 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 15
+#  define BUFFER_SIZE 1
 # endif
 # include "libft.h"
 # include <fcntl.h>

@@ -6,11 +6,11 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/02/24 19:38:50 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/02/25 16:59:48 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-files.c = src/cub_utils1.c src/map_parser.c src/parse_utils.c
+files.c = src/cub_utils1.c src/config_parser.c src/parse_utils.c
 
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g 
@@ -35,10 +35,12 @@ $(NAME) : $(files.o)
 
 clean :  
 		@rm -f $(files.o)
+		@make -C libft/ clean
 		@echo "\033[7mclean is done!\033[0m"
 
 fclean : clean
 		@rm  -f $(NAME)
+		@make -C libft/ fclean
 		@echo "\033[7mfclean is done!\033[0m"
 
 re	:  fclean $(NAME)	
