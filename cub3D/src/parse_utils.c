@@ -6,13 +6,13 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 22:28:00 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/28 21:52:13 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-void	parse_resolution(char *str)
+void			parse_resolution(char *str)
 {
 	int		i;
 	char	**splited_str;
@@ -31,12 +31,10 @@ void	parse_resolution(char *str)
 		print_cust_error(INVALID_RESOLUTION);
 	g_config.wind_width = ft_atoi_long(splited_str[0]);
 	g_config.wind_heith = ft_atoi(splited_str[1]);
-	while (--i >= 0)
-		free(splited_str[i]);
-	free(splited_str);
+	free_double_mass(splited_str, i);
 }
 
-void	parse_pathes(char *str, t_read_in_map readinmap)
+void			parse_pathes(char *str, t_read_in_map readinmap)
 {
 	int		i;
 	char	**splited_str;
@@ -53,19 +51,17 @@ void	parse_pathes(char *str, t_read_in_map readinmap)
 	if (readinmap == no)
 		g_config.no_path = ft_strdup(splited_str[0]);
 	else if (readinmap == ea)
-		g_config.no_path = ft_strdup(splited_str[0]);
+		g_config.ea_path = ft_strdup(splited_str[0]);
 	else if (readinmap == we)
-		g_config.no_path = ft_strdup(splited_str[0]);
+		g_config.we_path = ft_strdup(splited_str[0]);
 	else if (readinmap == so)
-		g_config.no_path = ft_strdup(splited_str[0]);
+		g_config.so_path = ft_strdup(splited_str[0]);
 	else if (readinmap == sprite)
-		g_config.no_path = ft_strdup(splited_str[0]);
-	while (--i >= 0)
-		free(splited_str[i]);
-	free(splited_str);
+		g_config.sprite_path = ft_strdup(splited_str[0]);
+		free_double_mass(splited_str, i);
 }
 
-void	parse_color(char *str, t_read_in_map readinmap)
+void			parse_color(char *str, t_read_in_map readinmap)
 {
 	int		i;
 	int		j;
@@ -76,20 +72,68 @@ void	parse_color(char *str, t_read_in_map readinmap)
 	i = 0;
 	j = 0;
 	len = ft_strlen(g_valid_start[readinmap]);
+	verify_color_parse(&str[len]);
 	splited_str = ft_split(&str[len], ',');
 	while (splited_str[i])
 		i++;
-	if (i != 3)
-		print_cust_error(INVALID_COLOR);
 	while (j < 3)
-		if (!ft_all_numeric(splited_str[j]) ||
+		if (!ft_all_numeric(splited_str[j]) || i < 3 ||
 		(temp = ft_atoi_long(splited_str[j])) > 255 || temp < 0)
 			print_cust_error(INVALID_COLOR);
 		else if (readinmap == c)
 			g_config.c_color[j++] = temp;
 		else if (readinmap == f)
-			g_config.c_color[j++] = temp;
-	while (--i >= 0)
-		free(splited_str[i]);
-	free(splited_str);
+			g_config.f_color[j++] = temp;
+	free_double_mass(splited_str, i);
+}
+
+void			verify_map_contour(void)
+{
+	int i;
+	int j;
+	int width;
+	char **temp_map;
+
+	i = 0;
+	j = 0;
+	temp_map = dublicate_map(g_config.map, '-');
+	while (i < g_config.map_height)
+	{
+		width = ft_strlen(g_config.map[i]);
+		while (j < width)
+		{
+			flood_fill(i, j, width);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	compare_two_maps(temp_map, g_config.map);
+	free_double_mass(temp_map, g_config.map_height);
+}
+
+void			check_map(char *str)
+{
+	int		i;
+	char	q;
+	bool	player;
+
+	i = 0;
+	player = false;
+	while (str[i] == '\n')
+		i++;
+	while (str[i] != '\0')
+	{
+		q = str[i];
+		if (q == 'W' || q == 'E' || q == 'S' || q == 'N')
+			check_player(&player, q);
+		else if (q != '1' && q != '2' && q != '0' &&
+		q != ' ' && q != '\n')
+			print_cust_error(INVALID_MAP);
+		else if (str[i + 1] && str[i] == '\n' && str[i + 1] == '\n')
+			print_cust_error(INVALID_MAP);
+		i++;
+	}
+	if (!player)
+		print_cust_error(INVALID_PLAYER);
 }

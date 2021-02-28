@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:45 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/25 17:03:23 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/02/28 21:38:16 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_read_in_map	g_readinmap;
 int				g_read_len;
-
 
 static bool		check_filename(char *str)
 {
@@ -40,7 +39,10 @@ static bool		check_line(char *str)
 		if (ft_strncmp(str, g_valid_start[i], ft_strlen(g_valid_start[i]))
 			== 0)
 		{
+			if (g_almost_found[i] == true)
+				print_cust_error(INVALID_MAP);
 			g_readinmap = i;
+			g_almost_found[i] = true;
 			g_ready_to_read_map++;
 			return (true);
 		}
@@ -78,13 +80,19 @@ static void		parse_map(int fd, char *file_name)
 	len = 0;
 	while (read(fd, &temp_chr, 1) == 1)
 		len++;
-	if (!(temp_str = (char*)ft_calloc(sizeof(char), len)))
+	if (!(temp_str = (char*)ft_calloc(sizeof(char), len + 1)))
 		print_cust_error(INVALID_MAP);
 	close(fd);
 	fd = open(file_name, O_RDONLY);
-	int result = read(fd, buff, g_read_len);
-	int res2 = read(fd, temp_str, len);
-	
+	if (!read(fd, buff, g_read_len) || !read(fd, temp_str, len))
+		print_cust_error(ERROR_MAP_PROCESSING);
+	check_map(temp_str);
+	create_map(temp_str);
+	// printf("before\n\n");
+	// print_map();
+	verify_map_contour();
+	// printf("\n\nafter\n\n");
+	free(temp_str);
 }
 
 bool			config_parser(char *file_name)
@@ -93,7 +101,7 @@ bool			config_parser(char *file_name)
 	int		fd;
 
 	line = NULL;
-	g_read_len = 0;
+	g_read_len = 8;
 	init_glob_vars();
 	if (check_filename(file_name) != false ||
 		(fd = open(file_name, O_RDONLY)) < 0)

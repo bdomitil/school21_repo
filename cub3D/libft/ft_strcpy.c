@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 18:37:47 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/28 17:42:08 by bdomitil         ###   ########.fr       */
+/*   Created: 2021/02/28 21:27:49 by bdomitil          #+#    #+#             */
+/*   Updated: 2021/02/28 21:27:50 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub_header.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strcpy(char *dst, char *src)
 {
-	if (argc > 3 || argc < 2)
-		print_cust_error(INVALID_NUMBER_OF_ARGS);
-	else if (argc == 2)
-		config_parser(argv[1]);
-	else if (argc == 3)
+	int i;
+
+	if (!dst || !src)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
 	{
-		config_parser(argv[2]);
-		//make screenshot (--save )
+		dst[i] = src[i];
+		i++;
 	}
-	print_map();
+	return (dst);
 }
