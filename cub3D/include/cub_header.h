@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/28 21:52:00 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:40:44 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include "libft.h"
+# include "mlx.h"
 /*part of structures for showing errors*/
 typedef enum	e_errors
 {
