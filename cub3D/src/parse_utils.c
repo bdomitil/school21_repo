@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/28 21:52:13 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/10 13:41:53 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void			parse_pathes(char *str, t_read_in_map readinmap)
 
 void			parse_color(char *str, t_read_in_map readinmap)
 {
-	int		i;
-	int		j;
-	char	**splited_str;
-	int		temp;
-	int		len;
+	int				i;
+	int				j;
+	char			**splited_str;
+	int				temp;
+	long long int	len;
 
 	i = 0;
 	j = 0;

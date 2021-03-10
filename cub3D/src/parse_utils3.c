@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/28 21:46:25 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/10 13:12:15 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ void compare_two_maps(char **map1, char **map2)
 		while (j < g_config.map_width)
 		{
 			if (map1[i][j] == '0' &&
-			map2[i][j] != '0')
+				map2[i][j] != '0')
+			print_cust_error(INVALID_MAP);
+			else if (map1[i][j] == '2' &&
+				map2[i][j] != '2')
+			print_cust_error(INVALID_MAP);
+			else if (map1[i][j] == g_config.man &&
+				map2[i][j] != g_config.man)
 			print_cust_error(INVALID_MAP);
 			j++;
 		}
