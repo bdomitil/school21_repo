@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/10 16:39:36 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:57:52 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void			parse_resolution(char *str)
 {
 	int		i;
 	char	**splited_str;
+	int		screen_width;
+	int		screen_heith;
 
 	i = 0;
 	splited_str = ft_split(&str[1], ' ');
@@ -23,18 +25,20 @@ void			parse_resolution(char *str)
 		i++;
 	if (i != 2)
 		print_cust_error(INVALID_RESOLUTION);
-	if (ft_atoi_long(splited_str[0]) <= 0)
+	if (ft_atoi_long(splited_str[0]) <= 0||
+		ft_atoi_long(splited_str[1]) <= 0)
 		print_cust_error(INVALID_RESOLUTION);
-	else if (ft_atoi_long(splited_str[0]) > INT32_MAX ||
+	mlx_get_screen_size(g_mlx, &screen_width, &screen_heith);
+	if (ft_atoi_long(splited_str[0]) > screen_width ||
 		ft_atoi(splited_str[0]) < 10)
-		print_cust_error(INVALID_RESOLUTION); // change to mlx screen size
-	else if (ft_atoi_long(splited_str[0]) <= 0)
-		print_cust_error(INVALID_RESOLUTION);
-	else if (ft_atoi_long(splited_str[1]) > INT32_MAX ||
+		g_config.wind_width = screen_width;
+	else
+		g_config.wind_width = ft_atoi_long(splited_str[0]);
+	if (ft_atoi_long(splited_str[1]) > screen_width ||
 		ft_atoi(splited_str[1]) < 10)
-		print_cust_error(INVALID_RESOLUTION);// change to mlx screen size
-	g_config.wind_width = ft_atoi_long(splited_str[0]);
-	g_config.wind_heith = ft_atoi(splited_str[1]);
+		g_config.wind_heith = screen_heith;
+	else
+		g_config.wind_heith = ft_atoi(splited_str[1]);
 	free_double_mass(splited_str, i);
 }
 

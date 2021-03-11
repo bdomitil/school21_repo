@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/10 16:40:44 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:43:10 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ any other means not */
 
 t_config g_config;
 /*global struct of config */
-
+void	*g_mlx;
 bool g_almost_found[8];
 /*is used to verify what is almost found*/
 
