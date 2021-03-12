@@ -6,12 +6,13 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/03/10 17:12:34 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/03/12 21:35:08 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 files.c = src/cub_utils1.c src/config_parser.c src/parse_utils.c src/parse_utils2.c  \
-src/flood_fill.c src/test_utils.c src/parse_utils3.c src/cub.c
+src/flood_fill.c src/test_utils.c src/parse_utils3.c src/cub.c src/mlx_start.c  \
+src/casting_utils.c
 
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g
@@ -26,7 +27,7 @@ all :	$(NAME)
 $(NAME) : $(files.o)
 		@make -C libft/
 		@make -C mlx/
-		@gcc $(CFLAGS) $(MlxFlags) $(files.c) libft/libft.a cub_lib.a -o cub3D
+		@gcc $(CFLAGS) $(MlxFlags) $(files.c) libft/libft.a -o cub3D
 		@echo "\033[7m CUB PROGRAM IS READY TO BE USED!\033[0m"
 
 

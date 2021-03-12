@@ -16,8 +16,6 @@ void			create_map(char *str)
 			longest = ft_strlen(temp_str[i]);
 		i++;
 	}
-	if (!(g_config.map = malloc(sizeof(char*) * i)))
-		print_cust_error(ERROR_MAP_PROCESSING);
 	while (i <= 0)
 		if (!(g_config.map[i--] = ft_calloc(1, longest + 1)))
 			print_cust_error(ERROR_MAP_PROCESSING);

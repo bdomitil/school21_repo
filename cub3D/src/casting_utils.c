@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   casting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 18:37:47 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 20:32:37 by bdomitil         ###   ########.fr       */
+/*   Created: 2021/03/12 21:32:20 by bdomitil          #+#    #+#             */
+/*   Updated: 2021/03/12 21:40:03 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-int main(int argc, char **argv)
+void	init_aray(t_ray *ray)
 {
-	if (argc > 3 || argc < 2)
-		print_cust_error(INVALID_NUMBER_OF_ARGS);
-	else if (argc == 2)
-		config_parser(argv[1]);
-	else if (argc == 3)
-	{
-		config_parser(argv[2]);
-		//make screenshot (--save )
-	}
-	mlx_start();
-
-	while (1);
+	ray->dirx = 0;
+	ray->diry = 0;
+	ray->camerax = 0;
+	ray->mapx = 0;
+	ray->mapy = 0;
+	ray->stepx = 0;
+	ray->stepy = 0;
+	ray->hit = 0;
+	ray->side = 0;
+	ray->sidex = 0;
+	ray->sidey = 0;
+	ray->dx = 0;
+	ray->dy = 0;
+	ray->dist = 0;
 }

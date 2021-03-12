@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/26 16:04:36 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/12 21:19:34 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,31 @@ void	init_glob_vars(void)
 	{
 		g_config.c_color[i] = 0;
 		g_config.f_color[i++] = 0;
+	}
+}
+
+void	player_configurate(int posx, int posy)
+{
+	g_mlx.player.posx = posx;
+	g_mlx.player.posy = posy;
+	if(g_config.man == 'W')
+	{
+		g_mlx.player.dirx = g_mlx.player.posx - 1;
+		g_mlx.player.diry = 0;
+	}
+	else if (g_config.man == 'E')
+	{
+		g_mlx.player.dirx = g_mlx.player.posx + 1;
+		g_mlx.player.diry = 0;
+	}
+	else if (g_config.man == 'S')
+	{
+		g_mlx.player.dirx = 0;
+		g_mlx.player.diry = g_mlx.player.posy - 1;
+	}
+	else 
+	{
+		g_mlx.player.dirx = 0;
+		g_mlx.player.diry = g_mlx.player.posy + 1;;
 	}
 }

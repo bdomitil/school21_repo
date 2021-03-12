@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:45 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/28 21:38:16 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/12 19:17:45 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,9 @@ bool			config_parser(char *file_name)
 		}
 		else
 			parse_line(line);
+		free(line);
 	}
+	free(line);
 	parse_map(fd, file_name);
 	close(fd);
 	return (true);

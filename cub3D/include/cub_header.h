@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/11 14:43:10 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/12 21:36:22 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,55 @@ typedef enum e_red_in_map
 	empty
 }	t_read_in_map;
 
+typedef struct s_ray
+{
+	double			dirx;
+	double			diry;
+	double			camerax;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
+	double			sidex;
+	double			sidey;
+	double			dx;
+	double			dy;
+	double			dist;
+}				t_ray;
 
+typedef struct	s_mlx_wind
+{
+	void        *img;
+    char        *addr;
+    int         bits_per_pixel;
+    int         line_length;
+    int         endian;
+}				t_mlx_wind;
 
+typedef struct	s_player
+{
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+}				t_player;
+
+typedef struct	s_plane
+{
+	double		x;
+	double		y;
+}				t_plane;
+
+typedef struct	s_mlx
+{
+	void		*mlx;
+	void		*mlx_wind;
+	t_mlx_wind	mlx_image;
+	t_ray		ray;
+	t_player	player;
+}				t_mlx;
 /*end of part*/
 
 bool	config_parser(char *file_name);
@@ -92,16 +139,19 @@ void	verify_map_contour(void);
 void	free_double_mass(char **mass, int mass_heigth);
 char	**dublicate_map(char **mass, char filling);
 void	create_map(char *str);
+void	player_configurate(int posx, int posy);
 void	compare_two_maps(char **map1, char **map2);
+void	mlx_start();
+void	init_aray(t_ray *ray);
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /
 any other means not */
 
-t_config g_config;
+t_config	g_config;
 /*global struct of config */
-void	*g_mlx;
-bool g_almost_found[8];
+t_mlx		g_mlx;
+bool		g_almost_found[8];
 /*is used to verify what is almost found*/
 
 static char *g_valid_start[] = {"R ", "NO ", "SO ", "WE ",

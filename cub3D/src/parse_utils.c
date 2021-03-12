@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/11 14:57:52 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/12 20:54:17 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			parse_resolution(char *str)
 	if (ft_atoi_long(splited_str[0]) <= 0||
 		ft_atoi_long(splited_str[1]) <= 0)
 		print_cust_error(INVALID_RESOLUTION);
-	mlx_get_screen_size(g_mlx, &screen_width, &screen_heith);
+	mlx_get_screen_size(g_mlx.mlx, &screen_width, &screen_heith);
 	if (ft_atoi_long(splited_str[0]) > screen_width ||
 		ft_atoi(splited_str[0]) < 10)
 		g_config.wind_width = screen_width;
@@ -66,7 +66,7 @@ void			parse_pathes(char *str, t_read_in_map readinmap)
 		g_config.so_path = ft_strdup(splited_str[0]);
 	else if (readinmap == sprite)
 		g_config.sprite_path = ft_strdup(splited_str[0]);
-		free_double_mass(splited_str, i);
+	free_double_mass(splited_str, i);
 }
 
 void			parse_color(char *str, t_read_in_map readinmap)
@@ -110,6 +110,8 @@ void			verify_map_contour(void)
 		width = ft_strlen(g_config.map[i]);
 		while (j < width)
 		{
+			if (g_config.map[i][j] == g_config.man)
+				player_configurate(i, j);
 			flood_fill(i, j, width);
 			j++;
 		}
