@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   draw_text_walls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/22 18:37:47 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/16 18:42:29 by bdomitil         ###   ########.fr       */
+/*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
+/*   Updated: 2021/03/15 18:51:47 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-int main(int argc, char **argv)
+void draw_text_wall(t_ray *ray)
 {
-	if (argc > 3 || argc < 2)
-		print_cust_error(INVALID_NUMBER_OF_ARGS);
-	else if (argc == 2)
-		config_parser(argv[1]);
-	else if (argc == 3)
-	{
-		config_parser(argv[2]);
-		//make screenshot (--save )
-	}
-	mlx_start();
 	
 }

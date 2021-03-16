@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 21:19:34 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/13 14:44:08 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	player_configurate(int posx, int posy)
 {
 	g_mlx.player.posx = posx;
 	g_mlx.player.posy = posy;
+	g_mlx.player.posx = 0;
+	g_mlx.player.posy = 0.66;
 	if(g_config.man == 'W')
 	{
 		g_mlx.player.dirx = g_mlx.player.posx - 1;

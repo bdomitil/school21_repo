@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 21:36:22 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/16 22:32:14 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ typedef enum	e_errors
 	INVALID_PATH,
 	INVALID_COLOR,
 	INVALID_PLAYER,
-	ERROR_MAP_PROCESSING
+	ERROR_MAP_PROCESSING,
+	PROCESSING_ERROR
 }				t_errors;
 
 static char	*g_cust_errors[] = {"INVALID_NUMBER_OF_ARGUMENTS",
 	"ERROR IN OPENING MAP", "INVALID MAP", "INVALID RESOLUTION",
 	"ERROR IN PATH TO SOMETHING IN CONFIG", "INVALID COLOR", 
-	"WRONG NUMBER OF PLAYERS", "ERROR PROCESSING MAP"};
+	"WRONG NUMBER OF PLAYERS", "ERROR PROCESSING MAP", "PROCESSING ERROR"};
 /*end of part*/
 
 typedef struct	s_config
@@ -71,23 +72,16 @@ typedef enum e_red_in_map
 	empty
 }	t_read_in_map;
 
-typedef struct s_ray
+typedef struct	s_image
 {
-	double			dirx;
-	double			diry;
-	double			camerax;
-	int				mapx;
-	int				mapy;
-	int				stepx;
-	int				stepy;
-	int				hit;
-	int				side;
-	double			sidex;
-	double			sidey;
-	double			dx;
-	double			dy;
-	double			dist;
-}				t_ray;
+	int		width;
+	int		height;
+	void	*img;
+	int		*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}				t_image;
 
 typedef struct	s_mlx_wind
 {
@@ -104,13 +98,28 @@ typedef struct	s_player
 	double	posy;
 	double	dirx;
 	double	diry;
+	double	planex;
+	double	planey;
 }				t_player;
 
-typedef struct	s_plane
+
+typedef struct s_ray
 {
-	double		x;
-	double		y;
-}				t_plane;
+	double			dirx;
+	double			diry;
+	double			camerax;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
+	double			sidex;
+	double			sidey;
+	double			deltx;
+	double			delty;
+	double			dist;
+}				t_ray;
 
 typedef struct	s_mlx
 {
@@ -119,6 +128,7 @@ typedef struct	s_mlx
 	t_mlx_wind	mlx_image;
 	t_ray		ray;
 	t_player	player;
+	char		**buff;
 }				t_mlx;
 /*end of part*/
 
@@ -142,7 +152,7 @@ void	create_map(char *str);
 void	player_configurate(int posx, int posy);
 void	compare_two_maps(char **map1, char **map2);
 void	mlx_start();
-void	init_aray(t_ray *ray);
+void	init_ray(t_ray *ray);
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /

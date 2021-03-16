@@ -6,13 +6,13 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 21:32:20 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 21:40:03 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/16 21:52:27 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-void	init_aray(t_ray *ray)
+void	init_ray(t_ray *ray)
 {
 	ray->dirx = 0;
 	ray->diry = 0;
@@ -25,7 +25,7 @@ void	init_aray(t_ray *ray)
 	ray->side = 0;
 	ray->sidex = 0;
 	ray->sidey = 0;
-	ray->dx = 0;
-	ray->dy = 0;
+	ray->deltx = 0;
+	ray->delty = 0;
 	ray->dist = 0;
 }

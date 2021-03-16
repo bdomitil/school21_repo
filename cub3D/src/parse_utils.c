@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 20:54:17 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/16 21:51:43 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void			parse_resolution(char *str)
 		print_cust_error(INVALID_RESOLUTION);
 	mlx_get_screen_size(g_mlx.mlx, &screen_width, &screen_heith);
 	if (ft_atoi_long(splited_str[0]) > screen_width ||
-		ft_atoi(splited_str[0]) < 10)
+		ft_atoi(splited_str[0]) < 50)
 		g_config.wind_width = screen_width;
 	else
 		g_config.wind_width = ft_atoi_long(splited_str[0]);
 	if (ft_atoi_long(splited_str[1]) > screen_width ||
-		ft_atoi(splited_str[1]) < 10)
+		ft_atoi(splited_str[1]) < 50)
 		g_config.wind_heith = screen_heith;
 	else
 		g_config.wind_heith = ft_atoi(splited_str[1]);
