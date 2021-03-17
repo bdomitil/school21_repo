@@ -6,14 +6,13 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/16 22:42:12 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:11:20 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 # define texheight 64
 # define texwidth 64
-
 void	texture_to_image(int *texture, char *path)
 {
 	t_image image;
@@ -22,8 +21,9 @@ void	texture_to_image(int *texture, char *path)
 
 	y = 0;
 	
-	image.img = mlx_xpm_file_to_image(g_mlx.mlx, path, &image.width, &image.height);
-	image.addr = (int *)mlx_get_data_addr(image.img, &image.bpp, &image.line_length, &image.endian);
+	if (!(image.img = mlx_xpm_file_to_image(g_mlx.mlx, path, &image.width, &image.height)))
+		print_cust_error(ERROR_MAP_OPENING);
+	mlx_get_data_addr(image.img, &image.bpp, &image.line_length, &image.endian);
 	while (y < image.height)
 	{
 		x= 0;
@@ -160,22 +160,30 @@ void	calc(t_ray *ray, int **textures, int **buff)
 	}
 }
 
-void draw(void)
+void mlx_draw(void)
 {
 	t_ray ray;
 	int i;
 	int j;
-	int *textures[5];
-	int buff[g_config.wind_heith][g_config.wind_width];
+	int **textures;
+	int **buff;
 	
 	i = 0;
 	j = 0;
+	if (!(buff = malloc(g_config.map_height * sizeof(int*))))
+		print_cust_error(PROCESSING_ERROR);
 	while (i < g_config.wind_width)
 	{
-		
-		j = 0;		
+		if(!(buff[i] = malloc(g_config.map_width * sizeof(int))))
+			print_cust_error(PROCESSING_ERROR);
+		while (j < g_config.wind_width)
+			buff[i][j++] = 0;
+		j = 0;
+		i++;
 	}
 	i = 0;
+	if (!(textures = malloc(sizeof(int*) * 5)))
+			print_cust_error(PROCESSING_ERROR);
 	while(i < 5)
 	{
 		if (!(textures[i] = malloc(sizeof(int) *(texheight * texwidth))))
@@ -190,6 +198,7 @@ void draw(void)
 		i++;
 		j = 0;
 	}
+	i = 0;	
 	prepare_textures(textures);
 	init_ray(&ray);
 	calc(&ray, textures, buff);

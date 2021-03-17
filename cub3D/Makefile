@@ -6,13 +6,13 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/03/12 21:35:08 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/03/17 17:54:17 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 files.c = src/cub_utils1.c src/config_parser.c src/parse_utils.c src/parse_utils2.c  \
-src/flood_fill.c src/test_utils.c src/parse_utils3.c src/cub.c src/mlx_start.c  \
-src/casting_utils.c
+src/flood_fill.c src/test_utils.c src/parse_utils3.c src/cub.c src/ft_mlx_start.c  \
+src/casting_utils.c src/draw.c src/draw_text_walls.c 
 
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g

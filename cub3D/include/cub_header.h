@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/16 22:32:14 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 17:57:20 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct	s_mlx
 	t_mlx_wind	mlx_image;
 	t_ray		ray;
 	t_player	player;
-	char		**buff;
 }				t_mlx;
 /*end of part*/
 
@@ -151,8 +150,9 @@ char	**dublicate_map(char **mass, char filling);
 void	create_map(char *str);
 void	player_configurate(int posx, int posy);
 void	compare_two_maps(char **map1, char **map2);
-void	mlx_start();
+void	ft_mlx_start();
 void	init_ray(t_ray *ray);
+void	mlx_draw(void);
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /
