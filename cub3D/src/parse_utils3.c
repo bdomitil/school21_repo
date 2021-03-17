@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/10 13:12:15 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:16:11 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void compare_two_maps(char **map1, char **map2)
 	}
 }
 
-void	free_double_mass(char **mass, int mass_heigth)
+void	free_double_mass(void **mass, int mass_heigth)
 {
 	int i;
 

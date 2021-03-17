@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/16 21:51:43 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:15:58 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			parse_resolution(char *str)
 		g_config.wind_heith = screen_heith;
 	else
 		g_config.wind_heith = ft_atoi(splited_str[1]);
-	free_double_mass(splited_str, i);
+	free_double_mass((void **)splited_str, i);
 }
 
 void			parse_pathes(char *str, t_read_in_map readinmap)
@@ -66,7 +66,7 @@ void			parse_pathes(char *str, t_read_in_map readinmap)
 		g_config.so_path = ft_strdup(splited_str[0]);
 	else if (readinmap == sprite)
 		g_config.sprite_path = ft_strdup(splited_str[0]);
-	free_double_mass(splited_str, i);
+	free_double_mass((void **)splited_str, i);
 }
 
 void			parse_color(char *str, t_read_in_map readinmap)
@@ -92,7 +92,7 @@ void			parse_color(char *str, t_read_in_map readinmap)
 			g_config.c_color[j++] = temp;
 		else if (readinmap == f)
 			g_config.f_color[j++] = temp;
-	free_double_mass(splited_str, i);
+	free_double_mass((void **)splited_str, i);
 }
 
 void			verify_map_contour(void)
@@ -119,7 +119,7 @@ void			verify_map_contour(void)
 		i++;
 	}
 	compare_two_maps(temp_map, g_config.map);
-	free_double_mass(temp_map, g_config.map_height);
+	free_double_mass((void **)temp_map, g_config.map_height);
 }
 
 void			check_map(char *str)

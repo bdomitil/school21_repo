@@ -22,7 +22,7 @@ void			create_map(char *str)
 	g_config.map_width = longest;
 	g_config.map_height = count_map_heigth(temp_str);
 	g_config.map = dublicate_map(temp_str, ' ');
-	free_double_mass(temp_str, g_config.map_height);	
+	free_double_mass((void **)temp_str, g_config.map_height);	
 }
 
 static bool		just_numerics(char *str)

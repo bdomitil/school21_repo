@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 20:32:07 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 17:57:59 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:07:24 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void ft_mlx_start()
 	mlx_img->addr = mlx_get_data_addr(mlx_img->img, &mlx_img->bits_per_pixel, 
 					&mlx_img->line_length, &mlx_img->endian);
 	mlx_draw();
-	mlx_loop(g_mlx.mlx);
+	// mlx_loop(g_mlx.mlx);
 }

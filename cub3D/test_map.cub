@@ -1,10 +1,10 @@
 R 840, 720
 
-NO ./source/path_to_the_north_texture
-EA ./source/path_to_the_east_texture
-SO ./source/path_to_the_south_texture
-WE ./source/path_to_the_west_texture
-S ./source/path_to_the_sprite_texture
+NO ./source/brick.xpm
+EA ./source/flower.xpm
+SO ./source/grass.xpm
+WE ./source/stone.xpm
+S ./source/star.xpm
 F 4,32,123
 C 0,21,1
 

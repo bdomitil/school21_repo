@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 17:57:20 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:14:46 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int		count_map_heigth(char **map);
 void	check_player(bool *player,char q);
 void	print_map(); //delete before finish
 void	verify_map_contour(void);
-void	free_double_mass(char **mass, int mass_heigth);
+void	free_double_mass(void **mass, int mass_heigth);
 char	**dublicate_map(char **mass, char filling);
 void	create_map(char *str);
 void	player_configurate(int posx, int posy);

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 18:11:20 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:20:27 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	texture_to_image(int *texture, char *path)
 	
 	if (!(image.img = mlx_xpm_file_to_image(g_mlx.mlx, path, &image.width, &image.height)))
 		print_cust_error(ERROR_MAP_OPENING);
-	mlx_get_data_addr(image.img, &image.bpp, &image.line_length, &image.endian);
+	image.addr = (int *) mlx_get_data_addr(image.img, &image.bpp, &image.line_length, &image.endian);
 	while (y < image.height)
 	{
 		x= 0;
@@ -32,8 +32,9 @@ void	texture_to_image(int *texture, char *path)
 			texture[image.width * y + x] = image.addr[image.width * y + x];
 			x++;
 		}
+		y++;
 	}
-	mlx_destroy_image(g_mlx.mlx, image.img);
+//	mlx_destroy_image(g_mlx.mlx, image.img);
 }
 
 void	prepare_textures(int **textures)
@@ -170,11 +171,11 @@ void mlx_draw(void)
 	
 	i = 0;
 	j = 0;
-	if (!(buff = malloc(g_config.map_height * sizeof(int*))))
+	if (!(buff = (int **)malloc(g_config.map_height * sizeof(int*))))
 		print_cust_error(PROCESSING_ERROR);
 	while (i < g_config.wind_width)
 	{
-		if(!(buff[i] = malloc(g_config.map_width * sizeof(int))))
+		if(!(buff[i] = (int *)malloc(g_config.map_width * sizeof(int))))
 			print_cust_error(PROCESSING_ERROR);
 		while (j < g_config.wind_width)
 			buff[i][j++] = 0;
@@ -182,11 +183,11 @@ void mlx_draw(void)
 		i++;
 	}
 	i = 0;
-	if (!(textures = malloc(sizeof(int*) * 5)))
+	if (!(textures = (int **)malloc(sizeof(int*) * 5)))
 			print_cust_error(PROCESSING_ERROR);
 	while(i < 5)
 	{
-		if (!(textures[i] = malloc(sizeof(int) *(texheight * texwidth))))
+		if (!(textures[i] = (int *)malloc(sizeof(int) *(texheight * texwidth))))
 			print_cust_error(PROCESSING_ERROR);
 		i++;
 	}
@@ -202,4 +203,6 @@ void mlx_draw(void)
 	prepare_textures(textures);
 	init_ray(&ray);
 	calc(&ray, textures, buff);
+	// free_double_mass((void**)textures, 5);
+	// free_double_mass((void**)buff, g_config.map_height);
 }
