@@ -6,7 +6,7 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/03/17 20:28:20 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/03/18 16:50:25 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ src/casting_utils.c src/draw.c src/draw_text_walls.c
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g
 #MlxFlags = -Lmlx/ -lmlx -framework OpenGL -framework AppKit 
+MlxFlags = -framework OpenGL -framework AppKit
 files.o = $(files.c:.c=.o)
 
 NAME = cub3D
@@ -26,19 +27,19 @@ all :	$(NAME)
 
 $(NAME) : $(files.o)
 		@make -C libft/
-		@make -C mlx/
-		@gcc $(CFLAGS) $(MlxFlags) $(files.c) libft/libft.a libmlx.a -o cub3D
+		@make -C minilibx/
+		@gcc $(CFLAGS) $(MlxFlags) $(files.c) libft/libft.a minilibx/libmlx.a -o cub3D 
 		@echo "\033[7m CUB PROGRAM IS READY TO BE USED!\033[0m"
 
 
 %.o : %.c 
-		@gcc $(CFLAGS) -Imlx/ -c  $<  -o $@
+		@gcc $(CFLAGS)  -c  $<  -o $@
 		@echo "\033[36m$<\033[0m \033[35m is compiled!\033[0m"
 
 clean :  
 		@rm -f $(files.o)
 		@make -C libft/ clean
-		@make -C mlx/ clean
+		@make -C minilibx/ clean
 		@echo "\033[7mclean is done!\033[0m"
 
 fclean : clean

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:47 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 17:52:34 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:16:14 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ int main(int argc, char **argv)
 		//make screenshot (--save )
 	}
 	ft_mlx_start();
-	
 }

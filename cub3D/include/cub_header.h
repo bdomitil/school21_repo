@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 20:14:46 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:55:46 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include "libft.h"
-# include "mlx.h"
+# include "mlx_static.h"
 /*part of structures for showing errors*/
 typedef enum	e_errors
 {
@@ -83,15 +83,6 @@ typedef struct	s_image
 	int		endian;
 }				t_image;
 
-typedef struct	s_mlx_wind
-{
-	void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-}				t_mlx_wind;
-
 typedef struct	s_player
 {
 	double	posx;
@@ -125,7 +116,7 @@ typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*mlx_wind;
-	t_mlx_wind	mlx_image;
+	t_image	mlx_image;
 	t_ray		ray;
 	t_player	player;
 }				t_mlx;
