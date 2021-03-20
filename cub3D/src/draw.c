@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/18 18:33:00 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/20 21:02:49 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	prepare_textures(int **textures)
 	texture_to_image(textures[3], g_config.ea_path);
 	texture_to_image(textures[4], g_config.sprite_path);
 }
-int		calc(t_ray *ray, int **textures, int **buff)
+int		calc(t_ray *rayq, int **textures, int **buff)
 {
 	int	x;
 	int y;
@@ -75,13 +75,16 @@ int		calc(t_ray *ray, int **textures, int **buff)
 	int texy;
 	int color;
 	double texpos;
+	t_ray *ray;
 	
 	x = 0;
+	init_ray(ray);
 	while (x < g_config.wind_width)
 	{
+		ray->hit = 0;
 		ray->camerax = 2 * x / (double)g_config.wind_width - 1;
-		ray->dirx = ray->diry + g_mlx.player.planex * ray->camerax;
-		ray->diry = ray->diry + g_mlx.player.planey * ray->camerax;
+		ray->dirx = g_mlx.player.dirx + g_mlx.player.planex * ray->camerax;
+		ray->diry = g_mlx.player.diry + g_mlx.player.planey * ray->camerax;
 		ray->mapx = (int)g_mlx.player.posx;
 		ray->mapy = (int)g_mlx.player.posy;
 		ray->deltx = fabs(1 / ray->dirx);
@@ -95,7 +98,7 @@ int		calc(t_ray *ray, int **textures, int **buff)
 		else
 		{
 			ray->stepx = 1;
-			ray->sidex= (ray->sidex + 1.0 - g_mlx.player.posx) * ray->deltx;
+			ray->sidex= (ray->mapx + 1.0 - g_mlx.player.posx) * ray->deltx;
 		}
 		if (ray->diry < 0)
 		{
@@ -110,7 +113,6 @@ int		calc(t_ray *ray, int **textures, int **buff)
 
 		while (ray->hit == 0)
 		{
-			//jump to next map square, OR in x-direction, OR in y-direction
 			if (ray->sidex < ray->sidey)
 			{
 				ray->sidex += ray->deltx;
@@ -123,52 +125,39 @@ int		calc(t_ray *ray, int **textures, int **buff)
 				ray->mapy += ray->stepy;
 				ray->side = 1;
 			}
-			//Check if ray has hit a wall
-			if (g_config.map[ray->mapx][ray->mapy] > 0) ray->hit = 1;
+			if (g_config.map[ray->mapx][ray->mapy] > 0)
+				ray->hit = 1;
 		}
 		if (ray->side == 0)
 			ray->dist = (ray->mapx - g_mlx.player.posx + (1 - ray->stepx) / 2) / ray->dirx;
 		else
 			ray->dist = (ray->mapy - g_mlx.player.posy + (1 - ray->stepy) / 2) / ray->diry;
-		//Calculate height of line to draw on screen
-		lineheight = (int)(g_config.map_height / ray->dist);
-		//calculate lowest and highest pixel to fill in current stripe
-		drawstart = -lineheight / 2 + g_config.map_height / 2;
+		lineheight = (int)(g_config.wind_heith / ray->dist);
+		drawstart = -lineheight / 2 + g_config.wind_heith / 2;
 		if(drawstart < 0)
 			drawstart = 0;
-		 drawend = lineheight / 2 + g_config.map_height / 2;
-		if(drawend >= g_config.map_height)
-			drawend = g_config.map_height - 1;
-
-		// texturing calculations
-		 texnum = g_config.map[ray->mapx][ray->mapy];
-
-		// calculate value of wallX
+		 drawend = lineheight / 2 + g_config.wind_heith / 2;
+		if(drawend >= g_config.wind_heith)
+			drawend = g_config.wind_heith - 1;
+		texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
 		if (ray->side == 0)
 			wallx = g_mlx.player.posy + ray->dist * ray->diry;
 		else
 			wallx = g_mlx.player.posx + ray->dist * ray->dirx;
 		wallx -= floor(wallx);
-
-		// x coordinate on the texture
 		texx = (int)(wallx * (double)texwidth);
 		if (ray->side == 0 && ray->dirx > 0)
 			texx = texwidth - texx - 1;
 		if (ray->side == 1 && ray->diry < 0)
 			texx = texwidth - texx - 1;
-
-		// How much to increase the texture coordinate perscreen pixel
 		step = 1.0 * texheight / lineheight;
-		// Starting texture coordinate
 		texpos = (drawstart - g_config.wind_heith / 2 + lineheight / 2) * step;
 		y = drawstart;
 		while (y < drawend)
 		{
-			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			texy = (int)texpos & (texheight - 1);
 			texpos += step;
 			color = textures[texnum][texheight * texy + texy];
-			// make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (ray->side == 1)
 				color = (color >> 1) & 8355711;
 			buff[y][x] = color;
@@ -181,7 +170,6 @@ int		calc(t_ray *ray, int **textures, int **buff)
 }
 void mlx_draw(void)
 {
-	t_ray ray;
 	int i;
 	int j;
 	int **textures;
@@ -208,13 +196,11 @@ void mlx_draw(void)
 		i++;
 	}	
 	prepare_textures(textures);
-	init_ray(&ray);
-	g_mlx.mlx = mlx_init();
 	g_mlx.mlx_wind= mlx_new_window(g_mlx.mlx, g_config.wind_width, 
 									g_config.wind_heith, "test_window");
 	g_mlx.mlx_image.img = mlx_new_image(g_mlx.mlx, g_config.wind_width, g_config.wind_heith);
 	g_mlx.mlx_image.addr = (int*)mlx_get_data_addr(g_mlx.mlx_image.img, &g_mlx.mlx_image.bpp, 
 					&g_mlx.mlx_image.line_length, &g_mlx.mlx_image.endian);
 	mlx_loop_hook(g_mlx.mlx, calc, buff);
-	mlx_loop(g_mlx.mlx);
+	// mlx_loop(g_mlx.mlx);
 }

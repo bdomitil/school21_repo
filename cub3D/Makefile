@@ -6,7 +6,7 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/03/18 16:50:25 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/03/20 21:02:27 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ src/casting_utils.c src/draw.c src/draw_text_walls.c
 
 #CFLAGS = -g -Wall -Wextra -Werror					
 CFLAGS = -g
-#MlxFlags = -Lmlx/ -lmlx -framework OpenGL -framework AppKit 
+# MlxFlags = -Lmlx/ -lmlx -framework OpenGL -framework AppKit 
 MlxFlags = -framework OpenGL -framework AppKit
 files.o = $(files.c:.c=.o)
 
