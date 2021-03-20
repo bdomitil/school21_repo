@@ -6,13 +6,15 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/20 21:02:49 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/20 21:26:21 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 # define texheight 64
 # define texwidth 64
+
+int **g_textures;
 void	texture_to_image(int *texture, char *path)
 {
 	t_image image;
@@ -34,7 +36,7 @@ void	texture_to_image(int *texture, char *path)
 		}
 		y++;
 	}
-	mlx_destroy_image(g_mlx.mlx, image.img);
+	// mlx_destroy_image(g_mlx.mlx, image.img);
 }
 void	draw_to_screen(int **buff)
 {
@@ -61,7 +63,7 @@ void	prepare_textures(int **textures)
 	texture_to_image(textures[3], g_config.ea_path);
 	texture_to_image(textures[4], g_config.sprite_path);
 }
-int		calc(t_ray *rayq, int **textures, int **buff)
+int		calc(int **buff)
 {
 	int	x;
 	int y;
@@ -75,9 +77,11 @@ int		calc(t_ray *rayq, int **textures, int **buff)
 	int texy;
 	int color;
 	double texpos;
+	t_ray temp_ray;
 	t_ray *ray;
 	
 	x = 0;
+	ray = &temp_ray;
 	init_ray(ray);
 	while (x < g_config.wind_width)
 	{
@@ -139,7 +143,8 @@ int		calc(t_ray *rayq, int **textures, int **buff)
 		 drawend = lineheight / 2 + g_config.wind_heith / 2;
 		if(drawend >= g_config.wind_heith)
 			drawend = g_config.wind_heith - 1;
-		texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
+		// texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
+		texnum = 2;
 		if (ray->side == 0)
 			wallx = g_mlx.player.posy + ray->dist * ray->diry;
 		else
@@ -157,7 +162,7 @@ int		calc(t_ray *rayq, int **textures, int **buff)
 		{
 			texy = (int)texpos & (texheight - 1);
 			texpos += step;
-			color = textures[texnum][texheight * texy + texy];
+			color = g_textures[texnum][texheight * texy + texy];
 			if (ray->side == 1)
 				color = (color >> 1) & 8355711;
 			buff[y][x] = color;
@@ -165,14 +170,18 @@ int		calc(t_ray *rayq, int **textures, int **buff)
 		}
 		x++;
 	}
-	draw_to_screen(buff);
 	return (0);
+}
+int		loop_fun(int **buff)
+{
+	calc(buff);
+	draw_to_screen(buff);
+	return 0;
 }
 void mlx_draw(void)
 {
 	int i;
 	int j;
-	int **textures;
 	int **buff;
 	
 	g_mlx.mlx = mlx_init();
@@ -187,20 +196,21 @@ void mlx_draw(void)
 		i++;
 	}
 	i = 0;
-	if (!(textures = (int **)ft_calloc(sizeof(int*), 5)))
+	if (!(g_textures = (int **)ft_calloc(sizeof(int*), 5)))
 			print_cust_error(PROCESSING_ERROR);
 	while(i < 5)
 	{
-		if (!(textures[i] = (int *)ft_calloc(sizeof(int), (texheight * texwidth))))
+		if (!(g_textures[i] = (int *)ft_calloc(sizeof(int), (texheight * texwidth))))
 			print_cust_error(PROCESSING_ERROR);
 		i++;
 	}	
-	prepare_textures(textures);
+	prepare_textures(g_textures);
 	g_mlx.mlx_wind= mlx_new_window(g_mlx.mlx, g_config.wind_width, 
 									g_config.wind_heith, "test_window");
 	g_mlx.mlx_image.img = mlx_new_image(g_mlx.mlx, g_config.wind_width, g_config.wind_heith);
 	g_mlx.mlx_image.addr = (int*)mlx_get_data_addr(g_mlx.mlx_image.img, &g_mlx.mlx_image.bpp, 
 					&g_mlx.mlx_image.line_length, &g_mlx.mlx_image.endian);
-	mlx_loop_hook(g_mlx.mlx, calc, buff);
-	// mlx_loop(g_mlx.mlx);
+	calc(buff);
+	mlx_loop_hook(g_mlx.mlx, loop_fun, buff);
+	mlx_loop(g_mlx.mlx);
 }
