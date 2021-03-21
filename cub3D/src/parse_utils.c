@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/18 16:59:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:41:26 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void			verify_map_contour(void)
 		while (j < width)
 		{
 			if (g_config.map[i][j] == g_config.man)
-				player_configurate(i, j);
+				player_configurate(j, i);
 			flood_fill(i, j, width);
 			j++;
 		}

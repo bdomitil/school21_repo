@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/18 16:58:18 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/21 22:18:23 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,36 @@ void	init_glob_vars(void)
 
 void	player_configurate(int posx, int posy)
 {
-	g_mlx.player.posx = posx;
-	g_mlx.player.posy = posy;
-	g_mlx.player.posx = 0;
-	g_mlx.player.posy = 0.66;
+	g_mlx.player.posx = posy;
+	g_mlx.player.posy = posx;
+	g_mlx.player.planex = 0;
+	g_mlx.player.planey = -0.66;
 	if(g_config.man == 'W')
 	{
-		g_mlx.player.dirx = g_mlx.player.posx - 1;
+		g_mlx.player.dirx = -1;
 		g_mlx.player.diry = 0;
+		// g_mlx.player.planex = 0;
+		// g_mlx.player.planey = -0.66;
 	}
 	else if (g_config.man == 'E')
 	{
-		g_mlx.player.dirx = g_mlx.player.posx + 1;
+		g_mlx.player.dirx = 1;
 		g_mlx.player.diry = 0;
+		// g_mlx.player.planex = 0;
+		// g_mlx.player.planey = 0.66;
 	}
 	else if (g_config.man == 'S')
 	{
 		g_mlx.player.dirx = 0;
-		g_mlx.player.diry = g_mlx.player.posy - 1;
+		g_mlx.player.diry = 1;
+		// g_mlx.player.planex = -0.66;
+		// g_mlx.player.planey = 0;
 	}
 	else 
 	{
 		g_mlx.player.dirx = 0;
-		g_mlx.player.diry = g_mlx.player.posy + 1;;
+		g_mlx.player.diry = -1;
+		// g_mlx.player.planex = 0.66;
+		// g_mlx.player.planey = 0;
 	}
 }

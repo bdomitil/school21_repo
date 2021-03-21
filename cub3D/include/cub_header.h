@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/18 17:55:46 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/21 21:53:55 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "mlx_static.h"
+# define A_KEY 0
+# define W_KEY 13
+# define S_KEY 1
+# define D_KEY 2
+# define ESC 53
+# define LEFT_KEY 123
+# define RIGHT_KEY 125
+# define UP_KEY 124
+# define DOWN_KEY 126
+
+
+
 /*part of structures for showing errors*/
 typedef enum	e_errors
 {
@@ -144,6 +156,8 @@ void	compare_two_maps(char **map1, char **map2);
 void	ft_mlx_start();
 void	init_ray(t_ray *ray);
 void	mlx_draw(void);
+int		key_press_event(int key);
+int		rgb_color_to_int(int red, int green, int blue);
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /
