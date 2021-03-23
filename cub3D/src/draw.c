@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/21 22:16:40 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/23 23:05:22 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@ void	draw_to_screen(int **buff)
 {
 	int y;
 	int x;
+	
+	mlx_clear_window(g_mlx.mlx, g_mlx.mlx_wind);
 	y = 0;
-	while (y < g_config.wind_heith)
+	while (y < g_config.wind_width)
 	{
 		x = 0;
-		while (x < g_config.wind_width)
+		while (x < g_config.wind_heith)
 		{
 			g_mlx.mlx_image.addr[y * g_config.wind_width + x] = buff[y][x];
 			x++;
 		}
 		y++;
 	}
+	
 	mlx_put_image_to_window(g_mlx.mlx, g_mlx.mlx_wind, g_mlx.mlx_image.img, 0, 0);
 }
 void	prepare_textures(int **textures)
@@ -88,16 +91,16 @@ int		calc(int **buff)
 	cell_collor = rgb_color_to_int(g_config.c_color[0],g_config.c_color[1], g_config.c_color[2]);
 	floor_collor = rgb_color_to_int(g_config.f_color[0],g_config.f_color[1], g_config.f_color[2]);
 	init_ray(ray);
-	while (y < g_config.wind_heith)
-	{
-		while (x < g_config.wind_width)
-			{
-				buff[y][x] = floor_collor;
-				buff[g_config.wind_heith - y - 1][x] = cell_collor;
-				x++;
-			}
-		y++;
-	}
+	// while (y < g_config.wind_heith)
+	// {
+	// 	while (x < g_config.wind_width)
+	// 		{
+	// 			buff[y][x] = floor_collor;
+	// 			buff[g_config.wind_heith - y - 1][x] = cell_collor;
+	// 			x++;
+	// 		}
+	// 	y++;
+	// }
 	x = 0;
 	y = 0;
 	while (x < g_config.wind_width)
@@ -111,11 +114,29 @@ int		calc(int **buff)
 		ray->mapx = (int)g_mlx.player.posx;
 		ray->mapy = (int)g_mlx.player.posy;
 		
-
-		
 		ray->deltx = fabs(1 / ray->dirx);
 		ray->delty = fabs(1 / ray->diry);
-		ray->hit = 0;
+		// if (ray->diry == 0)
+		// 	ray->deltx = 0;
+		// else
+		// {
+		// 	if (ray->dirx == 0)
+		// 		ray->deltx = 1;
+		// 	else
+		// 		ray->deltx = fabs(1 / ray->dirx);
+		// }
+
+		
+		// if (ray->dirx == 0)
+		// 	ray->delty = 0;
+		// else
+		// {
+		// 	if (ray->diry == 0)
+		// 		ray->delty = 1;
+		// 	else
+		// 		ray->delty = fabs(1 / ray->dirx);
+		// }
+
 		if (ray->dirx < 0)
 		{
 			ray->stepx = -1;
@@ -136,7 +157,7 @@ int		calc(int **buff)
 			ray->stepy = 1;
 			ray->sidey = (ray->mapy + 1.0 - g_mlx.player.posy) * ray->delty;
 		}
-
+		ray->hit = 0;
 		while (ray->hit == 0)
 		{
 			if (ray->sidex < ray->sidey)
@@ -151,13 +172,14 @@ int		calc(int **buff)
 				ray->mapy += ray->stepy;
 				ray->side = 1;
 			}
-			if (g_config.map[ray->mapy][ray->mapx] > 0)  // sega here
+			if (g_config.map[ray->mapy][ray->mapx] == '1')  // sega here
 				ray->hit = 1;
 		}
 		if (ray->side == 0)
 			ray->dist = (ray->mapx - g_mlx.player.posx + (1 - ray->stepx) / 2) / ray->dirx;
 		else
 			ray->dist = (ray->mapy - g_mlx.player.posy + (1 - ray->stepy) / 2) / ray->diry;
+			
 		lineheight = (int)(g_config.wind_heith / ray->dist);
 		drawstart = -lineheight / 2 + g_config.wind_heith / 2;
 		if(drawstart < 0)
@@ -165,13 +187,16 @@ int		calc(int **buff)
 		drawend = lineheight / 2 + g_config.wind_heith / 2;
 		if(drawend >= g_config.wind_heith)
 			drawend = g_config.wind_heith - 1;
+
+		//texture printing is here
 		// texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
-		texnum = 0;
+		texnum = 3;
 		if (ray->side == 0)
 			wallx = g_mlx.player.posy + ray->dist * ray->diry;
 		else
 			wallx = g_mlx.player.posx + ray->dist * ray->dirx;
-		wallx -= floor(wallx);
+		
+		wallx -= floor((wallx));
 		texx = (int)(wallx * (double)texwidth);
 		
 		if (ray->side == 0 && ray->dirx > 0)
@@ -182,14 +207,28 @@ int		calc(int **buff)
 			
 		step = 1.0 * texheight / lineheight;
 		texpos = (drawstart - g_config.wind_heith / 2 + lineheight / 2) * step;
-		y = drawstart;
+		y = 0;
+		// printf("start = %d\n end = %d\n", drawstart, drawend);
+		while (y < drawstart)
+		{
+			color = rgb_color_to_int(233, 212, 23);
+			buff[y][x] = color;
+			y++;
+		}
 		while (y < drawend)
 		{
 			texy = (int)texpos & (texheight - 1);
 			texpos += step;
 			color = g_textures[texnum][texheight * texy + texx];
-			// if (ray->side == 1)
-			// 	color = (color >> 1) & 8355711;
+			// color = rgb_color_to_int(255, 146, 79);
+			if (ray->side == 1)
+				color = (color >> 1) & 8355711;
+			buff[y][x] = color;
+			y++;
+		}
+		while (y < g_config.wind_heith)
+		{
+			color = rgb_color_to_int(255, 255, 255);
 			buff[y][x] = color;
 			y++;
 		}
@@ -236,6 +275,7 @@ void mlx_draw(void)
 	g_mlx.mlx_image.addr = (int*)mlx_get_data_addr(g_mlx.mlx_image.img, &g_mlx.mlx_image.bpp, 
 					&g_mlx.mlx_image.line_length, &g_mlx.mlx_image.endian);
 	mlx_loop_hook(g_mlx.mlx, loop_fun, buff);
+	calc(buff);
 	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, NULL);
 	mlx_loop(g_mlx.mlx);
 }
