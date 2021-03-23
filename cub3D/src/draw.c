@@ -6,14 +6,15 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 23:05:22 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/23 23:39:54 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
-# define texheight 64
-# define texwidth 64
-
+# define texheight 32
+# define texwidth 32
+//and counting texture height and width in texture to image 
+//fix 
 int **g_textures;
 void	texture_to_image(int *texture, char *path)
 {
@@ -76,7 +77,7 @@ int		calc(int **buff)
 	int texnum;
 	double wallx;
 	int texx;
-	int step;
+	double step;
 	int texy;
 	int color;
 	double texpos;
@@ -190,13 +191,13 @@ int		calc(int **buff)
 
 		//texture printing is here
 		// texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
-		texnum = 3;
+		texnum = 0;
 		if (ray->side == 0)
 			wallx = g_mlx.player.posy + ray->dist * ray->diry;
 		else
 			wallx = g_mlx.player.posx + ray->dist * ray->dirx;
 		
-		wallx -= floor((wallx));
+		wallx -= floor(wallx);
 		texx = (int)(wallx * (double)texwidth);
 		
 		if (ray->side == 0 && ray->dirx > 0)

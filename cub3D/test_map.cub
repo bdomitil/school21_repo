@@ -1,5 +1,5 @@
 R 1000, 1000
-NO ./source/brick.xpm
+NO ./source/stone.xpm
 EA ./source/grass.xpm
 SO ./source/stone.xpm
 WE ./source/grass.xpm

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/21 21:53:55 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/23 23:20:56 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ typedef struct	s_mlx
 	void		*mlx;
 	void		*mlx_wind;
 	t_image	mlx_image;
-	t_ray		ray;
 	t_player	player;
 }				t_mlx;
 /*end of part*/

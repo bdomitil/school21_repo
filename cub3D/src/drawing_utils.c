@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:46:20 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 22:55:25 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/23 23:41:51 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ int	key_press_event(int key)
 	if (key == A_KEY)
 	{
 		olddirx = g_mlx.player.dirx;
-		g_mlx.player.dirx = g_mlx.player.dirx * cos(-0.2) - g_mlx.player.diry * sin(-0.2);
-		g_mlx.player.diry = olddirx * sin(-0.2) + g_mlx.player.diry * cos(-0.2);
+		g_mlx.player.dirx = g_mlx.player.dirx * cos(-0.1) - g_mlx.player.diry * sin(-0.1);
+		g_mlx.player.diry = olddirx * sin(-0.1) + g_mlx.player.diry * cos(-0.1);
 		oldplanex = g_mlx.player.planex;
-		g_mlx.player.planex = g_mlx.player.planex * cos(-0.2) - g_mlx.player.planey * sin(-0.2);
-		g_mlx.player.planey = g_mlx.player.planex * sin(-0.2) + g_mlx.player.planey * cos(-0.2); 
+		g_mlx.player.planex = g_mlx.player.planex * cos(-0.1) - g_mlx.player.planey * sin(-0.1);
+		g_mlx.player.planey = g_mlx.player.planex * sin(-0.1) + g_mlx.player.planey * cos(-0.1); 
 	}
 	if (key == D_KEY)
 	{
 		olddirx = g_mlx.player.dirx;
-		g_mlx.player.dirx = g_mlx.player.dirx * cos(0.2) - g_mlx.player.diry * sin(0.2);
-		g_mlx.player.diry = olddirx * sin(0.2) + g_mlx.player.diry * cos(0.2);
+		g_mlx.player.dirx = g_mlx.player.dirx * cos(0.1) - g_mlx.player.diry * sin(0.1);
+		g_mlx.player.diry = olddirx * sin(0.1) + g_mlx.player.diry * cos(0.1);
 		oldplanex = g_mlx.player.planex;
-		g_mlx.player.planex = g_mlx.player.planex * cos(0.2) - g_mlx.player.planey * sin(0.2);
-		g_mlx.player.planey = g_mlx.player.planex * sin(0.2) + g_mlx.player.planey * cos(0.2); 
+		g_mlx.player.planex = g_mlx.player.planex * cos(0.1) - g_mlx.player.planey * sin(0.1);
+		g_mlx.player.planey = g_mlx.player.planex * sin(0.1) + g_mlx.player.planey * cos(0.1); 
 	}
 	if (key == ESC)
 		exit(0);
