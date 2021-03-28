@@ -6,11 +6,29 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 21:42:46 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/28 19:33:41 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
+
+int		world_sides(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->mapx > g_mlx.player.posx)
+			return (2);
+		else
+			return (3);
+	}
+	else
+	{
+		if (ray->mapx > g_mlx.player.diry)
+			return (1);
+		else 
+			return (0);
+	}
+}
 
 void	print_cust_error(t_errors error)
 {
@@ -18,25 +36,60 @@ void	print_cust_error(t_errors error)
 	exit(error + 1);
 }
 
-void	init_glob_vars(void)
+int		key_press_event(int key, int **buff)
 {
-	int i;
+	double stepx;
+	double stepy;
+	double olddirx;
+	double oldplanex;
 
-	i = 0;
-	g_ready_to_read_map = 0;
-	while (i < 3)
+	if (key == W_KEY)
 	{
-		g_config.c_color[i] = 0;
-		g_config.f_color[i++] = 0;
+		stepx = g_mlx.player.posx + g_mlx.player.dirx * 0.1;
+		stepy = g_mlx.player.posy + g_mlx.player.diry * 0.1;
+		if (g_config.map[(int)stepy][(int)g_mlx.player.posx] != '1')
+			g_mlx.player.posy = stepy;
+		if (g_config.map[(int)g_mlx.player.posy][(int)stepx] != '1')
+			g_mlx.player.posx = stepx;
 	}
+	if (key == S_KEY)
+	{
+		stepx = g_mlx.player.posx - g_mlx.player.dirx * 0.1;
+		stepy = g_mlx.player.posy - g_mlx.player.diry * 0.1;
+		if (g_config.map[(int)stepy][(int)g_mlx.player.posx] != '1')
+			g_mlx.player.posy = stepy;
+		if (g_config.map[(int)g_mlx.player.posy][(int)stepx] != '1')
+			g_mlx.player.posx = stepx;
+	}
+	if (key == A_KEY)
+	{
+		olddirx = g_mlx.player.dirx;
+		g_mlx.player.dirx = g_mlx.player.dirx * cos(-0.1) - g_mlx.player.diry * sin(-0.1);
+		g_mlx.player.diry = olddirx * sin(-0.1) + g_mlx.player.diry * cos(-0.1);
+		oldplanex = g_mlx.player.planex;
+		g_mlx.player.planex = g_mlx.player.planex * cos(-0.1) - g_mlx.player.planey * sin(-0.1);
+		g_mlx.player.planey = g_mlx.player.planex * sin(-0.1) + g_mlx.player.planey * cos(-0.1); 
+	}
+	if (key == D_KEY)
+	{
+		olddirx = g_mlx.player.dirx;
+		g_mlx.player.dirx = g_mlx.player.dirx * cos(0.1) - g_mlx.player.diry * sin(0.1);
+		g_mlx.player.diry = olddirx * sin(0.1) + g_mlx.player.diry * cos(0.1);
+		oldplanex = g_mlx.player.planex;
+		g_mlx.player.planex = g_mlx.player.planex * cos(0.1) - g_mlx.player.planey * sin(0.1);
+		g_mlx.player.planey = g_mlx.player.planex * sin(0.1) + g_mlx.player.planey * cos(0.1); 
+	}
+	if (key == ESC)
+		exit(0);
+	// loop_fun(buff);
+	// printf("x pos = %d\n,y pos = %d\n unit = %c\n",(int) g_mlx.player.posx ,(int) g_mlx.player.posy, g_config.map[(int) g_mlx.player.posx ][(int) g_mlx.player.posy]);
+	return (0);
 }
 
 void	player_configurate(int posx, int posy)
 {
 	g_mlx.player.posx = posx;
 	g_mlx.player.posy = posy;
-	// g_mlx.player.planex = 0;
-	// g_mlx.player.planey = -0.66;
 	if(g_config.man == 'W')
 	{
 		g_mlx.player.dirx = -1;

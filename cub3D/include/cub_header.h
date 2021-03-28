@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 23:20:56 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/28 21:53:22 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ typedef struct	s_config
 
 typedef enum e_red_in_map
 {
-	resolution,
 	no,
 	so,
 	we,
 	ea,
 	sprite,
+	resolution,
 	f,
 	c,
 	map,
@@ -105,6 +105,33 @@ typedef struct	s_player
 	double	planey;
 }				t_player;
 
+typedef struct	s_texture
+{
+	bool	felt;
+	int		*buff;
+	int		width;
+	int		height;
+}				t_texture;
+
+typedef struct	s_math_vars
+{
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+	int		texnum;
+	double	wallx;
+	int		texx;
+	double	step;
+	int		texy;
+	int		color;
+	double	texpos;
+}				t_math_vars;
+
+typedef struct	s_for_loop_list
+{
+	t_texture	*textures;
+	int			**buff;
+}				t_for_loop_list;
 
 typedef struct s_ray
 {
@@ -155,8 +182,16 @@ void	compare_two_maps(char **map1, char **map2);
 void	ft_mlx_start();
 void	init_ray(t_ray *ray);
 void	mlx_draw(void);
-int		key_press_event(int key);
+int		fill_celling(int **buff, int drawstart, int x);
+void	fill_floor(int **buff, int x, int y);
 int		rgb_color_to_int(int red, int green, int blue);
+void	draw_to_screen(int **buff);
+int		world_sides(t_ray *ray);
+void	texture_to_image(t_texture *textures, char *path, int tex_num);
+void	prepare_textures(t_texture *textures);
+int		key_press_event(int key, int **buff);
+int		loop_fun(int **buff);
+int		main_calc(t_for_loop_list *list);
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /
@@ -168,8 +203,8 @@ t_mlx		g_mlx;
 bool		g_almost_found[8];
 /*is used to verify what is almost found*/
 
-static char *g_valid_start[] = {"R ", "NO ", "SO ", "WE ",
-	"EA ", "S ", "F ", "C " , "\n"};
+static char *g_valid_start[] = {"NO ", "SO ", "WE ",
+	"EA ", "S ", "R", "F ", "C " , "\n"};
 /*it is need to compare with what we read in map*/
 
 

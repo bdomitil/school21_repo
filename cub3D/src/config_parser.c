@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:45 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/12 19:17:45 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:05:11 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ static void		parse_map(int fd, char *file_name)
 		print_cust_error(ERROR_MAP_PROCESSING);
 	check_map(temp_str);
 	create_map(temp_str);
-	// printf("before\n\n");
-	// print_map();
 	verify_map_contour();
-	// printf("\n\nafter\n\n");
 	free(temp_str);
 }
 
@@ -102,7 +99,6 @@ bool			config_parser(char *file_name)
 
 	line = NULL;
 	g_read_len = 8;
-	init_glob_vars();
 	if (check_filename(file_name) != false ||
 		(fd = open(file_name, O_RDONLY)) < 0)
 		print_cust_error(ERROR_MAP_OPENING);

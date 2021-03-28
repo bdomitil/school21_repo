@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 23:39:54 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/28 21:55:14 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,37 @@
 # define texwidth 32
 //and counting texture height and width in texture to image 
 //fix 
-int **g_textures;
-void	texture_to_image(int *texture, char *path)
+t_texture *text;
+
+void	texture_to_image(t_texture *textures, char *path, int tex_num)
 {
-	t_image image;
+	t_image *image;
 	int y;
 	int x;
 
 	y = 0;
-	
-	if (!(image.img = mlx_xpm_file_to_image(g_mlx.mlx, path, &image.width, &image.height)))
+	image = (t_image*)malloc(sizeof(t_image));
+	if (!(image->img = mlx_xpm_file_to_image(g_mlx.mlx, path,
+			&textures[tex_num].width, &textures[tex_num].height)))
 		print_cust_error(ERROR_MAP_OPENING);
-	image.addr = (int *) mlx_get_data_addr(image.img, &image.bpp, &image.line_length, &image.endian);
-	while (y < image.height)
-	{
-		x= 0;
-		while (x < image.width)
-		{
-			texture[image.width * y + x] = image.addr[image.width * y + x];
-			x++;
-		}
-		y++;
-	}
-	// mlx_destroy_image(g_mlx.mlx, image.img);
-}
-void	draw_to_screen(int **buff)
-{
-	int y;
-	int x;
-	
-	mlx_clear_window(g_mlx.mlx, g_mlx.mlx_wind);
-	y = 0;
-	while (y < g_config.wind_width)
+	image->addr = (int *) mlx_get_data_addr(image->img, &image->bpp,
+			&image->line_length, &image->endian);
+	if(!(textures[tex_num].buff = ft_calloc(sizeof(int),
+				(image->height * image->width))))
+		print_cust_error(PROCESSING_ERROR);
+	while (y < image->height)
 	{
 		x = 0;
-		while (x < g_config.wind_heith)
+		while (x < image->width)
 		{
-			g_mlx.mlx_image.addr[y * g_config.wind_width + x] = buff[y][x];
+			textures[tex_num].buff[image->width * y + x] = image->addr[image->width * y + x];
 			x++;
 		}
 		y++;
 	}
-	
-	mlx_put_image_to_window(g_mlx.mlx, g_mlx.mlx_wind, g_mlx.mlx_image.img, 0, 0);
+	// mlx_destroy_image(g_mlx.mlx, image->img);
 }
-void	prepare_textures(int **textures)
-{
-	texture_to_image(textures[0], g_config.no_path);
-	texture_to_image(textures[1], g_config.so_path);
-	texture_to_image(textures[2], g_config.we_path);
-	texture_to_image(textures[3], g_config.ea_path);
-	texture_to_image(textures[4], g_config.sprite_path);
-}
+
 int		calc(int **buff)
 {
 	int	x;
@@ -92,16 +71,6 @@ int		calc(int **buff)
 	cell_collor = rgb_color_to_int(g_config.c_color[0],g_config.c_color[1], g_config.c_color[2]);
 	floor_collor = rgb_color_to_int(g_config.f_color[0],g_config.f_color[1], g_config.f_color[2]);
 	init_ray(ray);
-	// while (y < g_config.wind_heith)
-	// {
-	// 	while (x < g_config.wind_width)
-	// 		{
-	// 			buff[y][x] = floor_collor;
-	// 			buff[g_config.wind_heith - y - 1][x] = cell_collor;
-	// 			x++;
-	// 		}
-	// 	y++;
-	// }
 	x = 0;
 	y = 0;
 	while (x < g_config.wind_width)
@@ -117,26 +86,6 @@ int		calc(int **buff)
 		
 		ray->deltx = fabs(1 / ray->dirx);
 		ray->delty = fabs(1 / ray->diry);
-		// if (ray->diry == 0)
-		// 	ray->deltx = 0;
-		// else
-		// {
-		// 	if (ray->dirx == 0)
-		// 		ray->deltx = 1;
-		// 	else
-		// 		ray->deltx = fabs(1 / ray->dirx);
-		// }
-
-		
-		// if (ray->dirx == 0)
-		// 	ray->delty = 0;
-		// else
-		// {
-		// 	if (ray->diry == 0)
-		// 		ray->delty = 1;
-		// 	else
-		// 		ray->delty = fabs(1 / ray->dirx);
-		// }
 
 		if (ray->dirx < 0)
 		{
@@ -173,7 +122,7 @@ int		calc(int **buff)
 				ray->mapy += ray->stepy;
 				ray->side = 1;
 			}
-			if (g_config.map[ray->mapy][ray->mapx] == '1')  // sega here
+			if (g_config.map[ray->mapy][ray->mapx] == '1')
 				ray->hit = 1;
 		}
 		if (ray->side == 0)
@@ -191,7 +140,7 @@ int		calc(int **buff)
 
 		//texture printing is here
 		// texnum = g_config.map[ray->mapx][ray->mapy];  //case which wall is facing the player
-		texnum = 0;
+		texnum = world_sides(ray);
 		if (ray->side == 0)
 			wallx = g_mlx.player.posy + ray->dist * ray->diry;
 		else
@@ -220,7 +169,7 @@ int		calc(int **buff)
 		{
 			texy = (int)texpos & (texheight - 1);
 			texpos += step;
-			color = g_textures[texnum][texheight * texy + texx];
+			color = text[texnum].buff[texheight * texy + texx];
 			// color = rgb_color_to_int(255, 146, 79);
 			if (ray->side == 1)
 				color = (color >> 1) & 8355711;
@@ -237,19 +186,22 @@ int		calc(int **buff)
 	}
 	return (0);
 }
+
 int		loop_fun(int **buff)
 {
 	calc(buff);
 	draw_to_screen(buff);
 	return 0;
 }
+
 void mlx_draw(void)
 {
-	int i;
-	int j;
-	int **buff;
+	int				i;
+	int				j;
+	int				**buff;
+	t_texture		*text;
+	t_for_loop_list	list;
 	
-	g_mlx.mlx = mlx_init();
 	i = 0;
 	j = 0;
 	if (!(buff = (int **)ft_calloc(sizeof(int*), g_config.wind_heith)))
@@ -261,22 +213,12 @@ void mlx_draw(void)
 		i++;
 	}
 	i = 0;
-	if (!(g_textures = (int **)ft_calloc(sizeof(int*), 5)))
-			print_cust_error(PROCESSING_ERROR);
-	while(i < 5)
-	{
-		if (!(g_textures[i] = (int *)ft_calloc(sizeof(int), (texheight * texwidth))))
-			print_cust_error(PROCESSING_ERROR);
-		i++;
-	}	
-	prepare_textures(g_textures);
-	g_mlx.mlx_wind= mlx_new_window(g_mlx.mlx, g_config.wind_width, 
-									g_config.wind_heith, "test_window");
-	g_mlx.mlx_image.img = mlx_new_image(g_mlx.mlx, g_config.wind_width, g_config.wind_heith);
-	g_mlx.mlx_image.addr = (int*)mlx_get_data_addr(g_mlx.mlx_image.img, &g_mlx.mlx_image.bpp, 
-					&g_mlx.mlx_image.line_length, &g_mlx.mlx_image.endian);
-	mlx_loop_hook(g_mlx.mlx, loop_fun, buff);
-	calc(buff);
-	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, NULL);
+	text = (t_texture*)malloc(sizeof(t_texture) * 5);
+	prepare_textures(text);
+	list.buff = buff;
+	list.textures = text;
+	// mlx_loop_hook(g_mlx.mlx, loop_fun, buff);
+	mlx_loop_hook(g_mlx.mlx, &main_calc, &list);
+	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, buff);
 	mlx_loop(g_mlx.mlx);
 }

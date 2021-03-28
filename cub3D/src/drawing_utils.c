@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:46:20 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/23 23:41:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/28 20:59:28 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,57 @@ int		rgb_color_to_int(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-int	key_press_event(int key)
+void	draw_to_screen(int **buff)
 {
-	double stepx;
-	double stepy;
-	double olddirx;
-	double oldplanex;
-
-	if (key == W_KEY)
+	int y;
+	int x;
+	
+	mlx_clear_window(g_mlx.mlx, g_mlx.mlx_wind);
+	y = 0;
+	while (y < g_config.wind_heith)
 	{
-		stepx = g_mlx.player.posx + g_mlx.player.dirx * 0.1;
-		stepy = g_mlx.player.posy + g_mlx.player.diry * 0.1;
-		if (g_config.map[(int)stepy][(int)g_mlx.player.posx] != '1')
-			g_mlx.player.posy = stepy;
-		if (g_config.map[(int)g_mlx.player.posy][(int)stepx] != '1')
-			g_mlx.player.posx = stepx;
+		x = 0;
+		while (x < g_config.wind_width)
+		{
+			g_mlx.mlx_image.addr[y * g_config.wind_width + x] = buff[y][x];
+			x++;
+		}
+		y++;
 	}
-	if (key == S_KEY)
-	{
-		stepx = g_mlx.player.posx - g_mlx.player.dirx * 0.1;
-		stepy = g_mlx.player.posy - g_mlx.player.diry * 0.1;
-		if (g_config.map[(int)stepy][(int)g_mlx.player.posx] != '1')
-			g_mlx.player.posy = stepy;
-		if (g_config.map[(int)g_mlx.player.posy][(int)stepx] != '1')
-			g_mlx.player.posx = stepx;
-	}
-	if (key == A_KEY)
-	{
-		olddirx = g_mlx.player.dirx;
-		g_mlx.player.dirx = g_mlx.player.dirx * cos(-0.1) - g_mlx.player.diry * sin(-0.1);
-		g_mlx.player.diry = olddirx * sin(-0.1) + g_mlx.player.diry * cos(-0.1);
-		oldplanex = g_mlx.player.planex;
-		g_mlx.player.planex = g_mlx.player.planex * cos(-0.1) - g_mlx.player.planey * sin(-0.1);
-		g_mlx.player.planey = g_mlx.player.planex * sin(-0.1) + g_mlx.player.planey * cos(-0.1); 
-	}
-	if (key == D_KEY)
-	{
-		olddirx = g_mlx.player.dirx;
-		g_mlx.player.dirx = g_mlx.player.dirx * cos(0.1) - g_mlx.player.diry * sin(0.1);
-		g_mlx.player.diry = olddirx * sin(0.1) + g_mlx.player.diry * cos(0.1);
-		oldplanex = g_mlx.player.planex;
-		g_mlx.player.planex = g_mlx.player.planex * cos(0.1) - g_mlx.player.planey * sin(0.1);
-		g_mlx.player.planey = g_mlx.player.planex * sin(0.1) + g_mlx.player.planey * cos(0.1); 
-	}
-	if (key == ESC)
-		exit(0);
-	// printf("x pos = %d\n,y pos = %d\n unit = %c\n",(int) g_mlx.player.posx ,(int) g_mlx.player.posy, g_config.map[(int) g_mlx.player.posx ][(int) g_mlx.player.posy]);
-	return (0);
+	mlx_put_image_to_window(g_mlx.mlx, g_mlx.mlx_wind, g_mlx.mlx_image.img, 0, 0);
 }
+
+void	prepare_textures(t_texture *textures)
+{
+	texture_to_image(textures, g_config.no_path, 0);
+	texture_to_image(textures, g_config.so_path, 1);
+	texture_to_image(textures, g_config.ea_path, 2);
+	texture_to_image(textures, g_config.we_path, 3);
+	texture_to_image(textures, g_config.sprite_path, 4);
+}
+
+int		fill_celling(int **buff, int drawstart, int x)
+{
+	int y;
+	int color;
+
+	y = 0;
+	while (y < drawstart)
+	{
+		color = rgb_color_to_int(g_config.c_color[0], g_config.c_color[1],
+			g_config.c_color[2]);
+		buff[y][x] = color;
+		y++;
+	}
+	return (y);
+}
+
+void	fill_floor(int **buff, int x, int y)
+{
+	while (y < g_config.wind_heith)
+		{
+			buff[y][x] = rgb_color_to_int(g_config.f_color[0], g_config.f_color[1], g_config.f_color[2]);
+			y++;
+		}
+}
+

@@ -1,10 +1,10 @@
 R 1000, 1000
-NO ./source/stone.xpm
+NO ./source/grass.xpm
 EA ./source/grass.xpm
-SO ./source/stone.xpm
+SO ./source/grass.xpm
 WE ./source/grass.xpm
 S ./source/grass.xpm
-F 4,32,123
+F 4,32,42
 C 0,21,1
 
         1111111111111111111111111
