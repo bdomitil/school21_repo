@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/28 22:14:44 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:28:26 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void		text_pos_findig(t_ray *ray, t_texture *text, t_math_vars *vars)
 	vars->texpos = (vars->drawstart - g_config.wind_heith / 2 + vars->lineheight / 2) * vars->step;	
 }
 
-static void		buff_filling(t_texture *textures, t_ray *ray, int x, int **buff, t_math_vars *vars)
+static void		buff_filling(t_texture *textures, t_ray *ray, int x, 
+				int **buff, t_math_vars *vars)
 {
 	int y;
 

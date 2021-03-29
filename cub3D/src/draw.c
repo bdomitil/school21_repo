@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/28 21:55:14 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:10:45 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,32 @@ t_texture *text;
 
 void	texture_to_image(t_texture *textures, char *path, int tex_num)
 {
-	t_image *image;
+	t_image image;
 	int y;
 	int x;
 
 	y = 0;
-	image = (t_image*)malloc(sizeof(t_image));
-	if (!(image->img = mlx_xpm_file_to_image(g_mlx.mlx, path,
-			&textures[tex_num].width, &textures[tex_num].height)))
-		print_cust_error(ERROR_MAP_OPENING);
-	image->addr = (int *) mlx_get_data_addr(image->img, &image->bpp,
-			&image->line_length, &image->endian);
+	if (!(image.img = mlx_xpm_file_to_image(g_mlx.mlx, path,
+			&image.width, &image.height)))
+		print_cust_error(INVALID_TEXTURE);
+	image.addr = (int *) mlx_get_data_addr(image.img, &image.bpp,
+			&image.line_length, &image.endian);
 	if(!(textures[tex_num].buff = ft_calloc(sizeof(int),
-				(image->height * image->width))))
+				(image.width * image.height))))
 		print_cust_error(PROCESSING_ERROR);
-	while (y < image->height)
+	while (y < image.height)
 	{
 		x = 0;
-		while (x < image->width)
+		while (x < image.width)
 		{
-			textures[tex_num].buff[image->width * y + x] = image->addr[image->width * y + x];
+			textures[tex_num].buff[image.width * y + x] =
+				image.addr[image.width * y + x];
 			x++;
 		}
 		y++;
 	}
+	textures[tex_num].width = image.width;
+	textures[tex_num].height = image.height;
 	// mlx_destroy_image(g_mlx.mlx, image->img);
 }
 

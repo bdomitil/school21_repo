@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/28 21:53:22 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:22:02 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define D_KEY 2
 # define ESC 53
 # define LEFT_KEY 123
-# define RIGHT_KEY 125
-# define UP_KEY 124
-# define DOWN_KEY 126
+# define RIGHT_KEY 124
+# define UP_KEY 126
+# define DOWN_KEY 125
 
 
 
@@ -43,13 +43,15 @@ typedef enum	e_errors
 	INVALID_COLOR,
 	INVALID_PLAYER,
 	ERROR_MAP_PROCESSING,
-	PROCESSING_ERROR
+	PROCESSING_ERROR,
+	INVALID_TEXTURE
 }				t_errors;
 
 static char	*g_cust_errors[] = {"INVALID_NUMBER_OF_ARGUMENTS",
 	"ERROR IN OPENING MAP", "INVALID MAP", "INVALID RESOLUTION",
 	"ERROR IN PATH TO SOMETHING IN CONFIG", "INVALID COLOR", 
-	"WRONG NUMBER OF PLAYERS", "ERROR PROCESSING MAP", "PROCESSING ERROR"};
+	"WRONG NUMBER OF PLAYERS", "ERROR PROCESSING MAP", "PROCESSING ERROR", 
+	"NOT VALID TEXTURE FILE"};
 /*end of part*/
 
 typedef struct	s_config
@@ -189,7 +191,7 @@ void	draw_to_screen(int **buff);
 int		world_sides(t_ray *ray);
 void	texture_to_image(t_texture *textures, char *path, int tex_num);
 void	prepare_textures(t_texture *textures);
-int		key_press_event(int key, int **buff);
+int		key_press_event(int key);
 int		loop_fun(int **buff);
 int		main_calc(t_for_loop_list *list);
 /*global variables here*/
