@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/29 19:28:26 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:38:14 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int				main_calc(t_for_loop_list *list)
 	t_math_vars vars;
 
 	init_ray(&ray);
+	moving_loop(&list->to_move);
 	x = 0;
 	while (x < g_config.wind_width)
 	{

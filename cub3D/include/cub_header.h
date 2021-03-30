@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/29 22:22:02 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:40:43 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,31 +109,49 @@ typedef struct	s_player
 
 typedef struct	s_texture
 {
-	bool	felt;
 	int		*buff;
 	int		width;
 	int		height;
 }				t_texture;
 
+typedef struct	s_mov_step
+{
+	int		key;
+	bool	pressed;
+}				t_mov_step;
+
+typedef struct	s_moving
+{
+	t_mov_step	forward;
+	t_mov_step	back;
+	t_mov_step	left;
+	t_mov_step	right;
+	t_mov_step	rot_left;
+	t_mov_step	rot_right;
+}				t_moving;
+
 typedef struct	s_math_vars
 {
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-	int		texnum;
-	double	wallx;
-	int		texx;
-	double	step;
-	int		texy;
-	int		color;
-	double	texpos;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	int			texnum;
+	double		wallx;
+	int			texx;
+	double		step;
+	int			texy;
+	int			color;
+	double		texpos;
 }				t_math_vars;
 
 typedef struct	s_for_loop_list
 {
 	t_texture	*textures;
 	int			**buff;
+	t_moving	to_move;
 }				t_for_loop_list;
+
+
 
 typedef struct s_ray
 {
@@ -191,9 +209,17 @@ void	draw_to_screen(int **buff);
 int		world_sides(t_ray *ray);
 void	texture_to_image(t_texture *textures, char *path, int tex_num);
 void	prepare_textures(t_texture *textures);
-int		key_press_event(int key);
+int		key_press_event(int key, t_moving *to_move);
+int		key_release_event(int key, t_moving *to_move);
+int		moving_loop(t_moving *to_move);
 int		loop_fun(int **buff);
 int		main_calc(t_for_loop_list *list);
+int		move_forward(void);
+int		move_back(void);
+int		move_left(void);
+int		move_right(void);
+void	init_to_move(t_moving *to_move);
+
 /*global variables here*/
 int g_ready_to_read_map;
 /*shows whether we ready or nor to read map, 8 == ready /
