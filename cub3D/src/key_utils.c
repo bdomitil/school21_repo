@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 20:35:53 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/30 21:58:19 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:14:24 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,36 +43,35 @@ int		rotate_right(void)
 int	key_release_event(int key, t_moving *to_move)
 {
 	if (key == W_KEY)
-		to_move->forward.pressed = false;		
+		to_move->forward = false;		
 	else if (key == S_KEY)
-		to_move->back.pressed = false;
+		to_move->back = false;
 	else if (key == A_KEY)
-		to_move->left.pressed = false;	
+		to_move->left = false;	
 	else if (key == D_KEY)
-		to_move->right.pressed = false;
+		to_move->right = false;
 	else if (key == LEFT_KEY)
-		to_move->rot_left.pressed = false;
+		to_move->rot_left = false;
 	else if (key == RIGHT_KEY)
-		to_move->rot_right.pressed = false;
+		to_move->rot_right = false;
 	return (0);
-	
 }
 
 int key_press_event(int key, t_moving *to_move)
 {
 
 	if (key == W_KEY)
-		to_move->forward.pressed = true;
+		to_move->forward = true;
 	if (key == S_KEY)
-		to_move->back.pressed = true;
+		to_move->back = true;
 	if (key == A_KEY)
-		to_move->left.pressed = true;
+		to_move->left = true;
 	if (key == D_KEY)
-		to_move->right.pressed = true;
+		to_move->right = true;
 	if (key == LEFT_KEY)
-		to_move->rot_left.pressed = true;
+		to_move->rot_left = true;
 	if (key == RIGHT_KEY)
-		to_move->rot_right.pressed = true;
+		to_move->rot_right = true;
 	if (key == ESC)
 		exit(0);
 	return (0);
@@ -80,17 +79,17 @@ int key_press_event(int key, t_moving *to_move)
 
 int	moving_loop(t_moving *to_move)
 {
-	if (to_move->forward.pressed)
+	if (to_move->forward)
 		move_forward();
-	if (to_move->back.pressed)
+	if (to_move->back)
 		move_back();
-	if (to_move->left.pressed)
+	if (to_move->left)
 		move_left();
-	if (to_move->right.pressed)
+	if (to_move->right)
 		move_right();
-	if (to_move->rot_right.pressed)
+	if (to_move->rot_right)
 		rotate_right();
-	if (to_move->rot_left.pressed)
+	if (to_move->rot_left)
 		rotate_left();
 	return (0);
 }

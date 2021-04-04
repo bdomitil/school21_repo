@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/30 21:40:43 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:12:40 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,20 +114,15 @@ typedef struct	s_texture
 	int		height;
 }				t_texture;
 
-typedef struct	s_mov_step
-{
-	int		key;
-	bool	pressed;
-}				t_mov_step;
 
 typedef struct	s_moving
 {
-	t_mov_step	forward;
-	t_mov_step	back;
-	t_mov_step	left;
-	t_mov_step	right;
-	t_mov_step	rot_left;
-	t_mov_step	rot_right;
+	bool	forward;
+	bool	back;
+	bool	left;
+	bool	right;
+	bool	rot_left;
+	bool	rot_right;
 }				t_moving;
 
 typedef struct	s_math_vars

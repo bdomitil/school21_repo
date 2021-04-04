@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 16:11:14 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/30 21:40:31 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:13:04 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	move_right(void)
 
 void	init_to_move(t_moving *to_move)
 {
-	to_move->forward.pressed = false;
-	to_move->back.pressed = false;
-	to_move->left.pressed = false;
-	to_move->right.pressed = false;
-	to_move->rot_left.pressed = false;
-	to_move->rot_right.pressed = false;
+	to_move->forward = false;
+	to_move->back = false;
+	to_move->left = false;
+	to_move->right = false;
+	to_move->rot_left = false;
+	to_move->rot_right = false;
 }

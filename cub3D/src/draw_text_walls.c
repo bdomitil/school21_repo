@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/30 21:38:14 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:41:03 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ while (ray->hit == 0)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if (g_config.map[ray->mapy][ray->mapx] == '1')
+		if (g_config.map[ray->mapy][ray->mapx] == '1' ||
+			g_config.map[ray->mapy][ray->mapx] == '2')
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -109,7 +110,6 @@ static void		buff_filling(t_texture *textures, t_ray *ray, int x,
 		vars->texpos += vars->step;
 		buff[y][x] = textures[vars->texnum].buff
 			[textures[vars->texnum].height * vars->texy + vars->texx];
-		// buff[y][x] = rgb_color_to_int(255,255,250);
 		y++;
 	}
 	fill_floor(buff, x, y);
