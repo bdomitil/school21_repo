@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/04 15:49:39 by bdomitil          #+#    #+#             */
+/*   Updated: 2021/04/04 15:51:13 by bdomitil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub_header.h"
 
 void			create_map(char *str)
 {
 	int		longest;
 	char	**temp_str;
-	int 	i;
+	int		i;
 
 	i = 0;
 	longest = 0;
@@ -12,7 +24,7 @@ void			create_map(char *str)
 		print_cust_error(ERROR_MAP_PROCESSING);
 	while (temp_str[i])
 	{
-		if (ft_strlen(temp_str[i]) > longest)
+		if ((int)ft_strlen(temp_str[i]) > longest)
 			longest = ft_strlen(temp_str[i]);
 		i++;
 	}
@@ -22,7 +34,7 @@ void			create_map(char *str)
 	g_config.map_width = longest;
 	g_config.map_height = count_map_heigth(temp_str);
 	g_config.map = dublicate_map(temp_str, ' ');
-	free_double_mass((void **)temp_str, g_config.map_height);	
+	free_double_mass((void **)temp_str, g_config.map_height);
 }
 
 static bool		just_numerics(char *str)
@@ -43,7 +55,7 @@ int				count_map_heigth(char **map)
 
 	i = 0;
 	height = 0;
-	while(map[i++])
+	while (map[i++])
 		height++;
 	if (height < 3)
 		print_cust_error(INVALID_MAP);
@@ -51,17 +63,17 @@ int				count_map_heigth(char **map)
 }
 
 void			check_player(bool *player, char q)
-{	
+{
 	if (q == 'W' || q == 'E' || q == 'S' || q == 'N')
+	{
+		if (*player)
+			print_cust_error(INVALID_PLAYER);
+		else
 		{
-			if (*player)
-				print_cust_error(INVALID_PLAYER);
-			else
-			{
-				*player = true;
-				g_config.man = q;
-			}
+			*player = true;
+			g_config.man = q;
 		}
+	}
 }
 
 bool			verify_color_parse(char *str)
@@ -70,7 +82,7 @@ bool			verify_color_parse(char *str)
 	int commas;
 
 	i = 0;
-	commas  = 0;
+	commas = 0;
 	while (str[i] == ' ')
 		i++;
 	while (str[i] != '\0' && commas != 2)
@@ -85,5 +97,5 @@ bool			verify_color_parse(char *str)
 	}
 	if (commas != 2 || !just_numerics(&str[i]))
 		print_cust_error(INVALID_COLOR);
-	return true;
+	return (true);
 }

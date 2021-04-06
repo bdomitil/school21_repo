@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/04 14:13:59 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/06 19:53:13 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,26 @@ void mlx_draw(void)
 {
 	int				i;
 	int				j;
-	int				**buff;
-	t_texture		*text;
 	t_for_loop_list	list;
 	
 	i = 0;
 	j = 0;
-	if (!(buff = (int **)ft_calloc(sizeof(int*), g_config.wind_heith)))
+	if (!(list.buff = (int **)ft_calloc(sizeof(int*), g_config.wind_heith)))
 		print_cust_error(PROCESSING_ERROR);
 	while (i < g_config.wind_heith)
 	{
-		if(!(buff[i] = (int *)ft_calloc(sizeof(int), g_config.wind_width)))
+		if(!(list.buff[i] = (int *)ft_calloc(sizeof(int), g_config.wind_width)))
 			print_cust_error(PROCESSING_ERROR);
 		i++;
 	}
 	i = 0;
-	text = (t_texture*)malloc(sizeof(t_texture) * 5);
-	prepare_textures(text);
-	list.buff = buff;
-	list.textures = text;
+	if (!(list.textures = (t_texture*)malloc(sizeof(t_texture) * 5)))
+		print_cust_error(PROCESSING_ERROR);
+	if (!(list.zbuff = malloc(sizeof(int) * g_config.wind_width)))
+		print_cust_error(PROCESSING_ERROR);
+	prepare_textures(list.textures);
 	init_to_move(&list.to_move);
+	main_draw_sprite();
 	mlx_hook(g_mlx.mlx_wind, 3, 0, &key_release_event, &list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, &list.to_move);
 	mlx_loop_hook(g_mlx.mlx, &main_calc, &list);

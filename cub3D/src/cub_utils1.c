@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/29 22:14:54 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:20:50 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		world_sides(t_ray *ray)
 	{
 		if (ray->mapy > g_mlx.player.posy)
 			return (1);
-		else 
+		else
 			return (0);
 	}
 }
@@ -35,8 +35,6 @@ void	print_cust_error(t_errors error)
 	write(2, g_cust_errors[error], ft_strlen(g_cust_errors[error]));
 	exit(error + 1);
 }
-
-
 
 void	player_configurate(int posx, int posy)
 {

@@ -6,13 +6,42 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/17 20:16:11 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/06 20:01:08 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-void compare_two_maps(char **map1, char **map2)
+void	get_sprites_pos(t_sprites **sprites)
+{
+	int i;
+	int j;
+	int sp_num;
+
+	i = 0;
+	sp_num = 0;
+	while (i < g_config.map_height)
+	{
+		j = -1;
+		while (++j < g_config.map_width && sp_num < g_config.sprite_num)
+			if (g_config.map[i][j] == 2)
+			{
+				if (!(sprites[sp_num] = malloc(sizeof(t_sprites))))
+					print_cust_error(PROCESSING_ERROR);
+				sprites[0][sp_num].x = i;
+				sprites[0][sp_num].y = j;
+				sp_num++;
+			}
+		i++;
+	}
+	i = -1;
+	while (++i < g_config.sprite_num)
+		sprites[0][i].dist_to_player = ((g_mlx.player.posx - sprites[0][i].x) *
+		(g_mlx.player.posx - sprites[0][i].x) + (g_mlx.player.posy - sprites[0][i].y)
+			* (g_mlx.player.posy - sprites[0][i].y));
+}
+
+void	compare_two_maps(char **map1, char **map2)
 {
 	int i;
 	int j;
@@ -54,7 +83,7 @@ void	free_double_mass(void **mass, int mass_heigth)
 	free(mass);
 }
 
-char **dublicate_map(char **mass, char filling)
+char	**dublicate_map(char **mass, char filling)
 {
 	char	**to_ret;
 	int		i;

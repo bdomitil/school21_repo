@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:45 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/24 16:05:11 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/04 15:48:08 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ bool			config_parser(char *file_name)
 
 	line = NULL;
 	g_read_len = 8;
-	if (check_filename(file_name) != false ||
-		(fd = open(file_name, O_RDONLY)) < 0)
+	fd = open(file_name, O_RDONLY);
+	if (check_filename(file_name) != false || fd < 0)
 		print_cust_error(ERROR_MAP_OPENING);
 	while (get_next_line(fd, &line) > 0)
 	{

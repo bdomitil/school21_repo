@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/31 16:12:40 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/06 20:00:55 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,7 @@ static char	*g_cust_errors[] = {"INVALID_NUMBER_OF_ARGUMENTS",
 	"NOT VALID TEXTURE FILE"};
 /*end of part*/
 
-typedef struct	s_config
-{
-	int		wind_width;
-	int		wind_heith;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*sprite_path;
-	int		f_color[3];
-	int		c_color[3];
-	char	**map;
-	int		map_height;
-	int		map_width;
-	char	man;
-}				t_config;
+
 /*part of structures for verifying .cub file */
 
 typedef enum e_red_in_map
@@ -143,10 +128,16 @@ typedef struct	s_for_loop_list
 {
 	t_texture	*textures;
 	int			**buff;
+	int			*zbuff;
 	t_moving	to_move;
 }				t_for_loop_list;
 
-
+typedef struct	s_sprites
+{
+	int		x;
+	int		y;
+	double	dist_to_player;
+}				t_sprites;
 
 typedef struct s_ray
 {
@@ -174,6 +165,24 @@ typedef struct	s_mlx
 	t_player	player;
 }				t_mlx;
 /*end of part*/
+
+typedef struct	s_config
+{
+	int		wind_width;
+	int		wind_heith;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	char	*sprite_path;
+	int		f_color[3];
+	int		c_color[3];
+	char	**map;
+	int		map_height;
+	int		map_width;
+	char	man;
+	int		sprite_num;
+}				t_config;
 
 bool	config_parser(char *file_name);
 void	print_cust_error(t_errors error);
@@ -214,6 +223,8 @@ int		move_back(void);
 int		move_left(void);
 int		move_right(void);
 void	init_to_move(t_moving *to_move);
+void	get_sprites_pos(t_sprites **sprites);
+int		main_draw_sprite();
 
 /*global variables here*/
 int g_ready_to_read_map;

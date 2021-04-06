@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/24 16:29:55 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:17:57 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void			check_map(char *str)
 			print_cust_error(INVALID_MAP);
 		else if (str[i + 1] && str[i] == '\n' && str[i + 1] == '\n')
 			print_cust_error(INVALID_MAP);
+		else if (str[i] == '2')
+			g_config.sprite_num++;
 		i++;
 	}
 	if (!player)
