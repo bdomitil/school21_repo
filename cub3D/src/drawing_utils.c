@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:46:20 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/29 22:20:29 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:49:07 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	draw_to_screen(int **buff)
 {
 	int y;
 	int x;
+	
 	
 	mlx_clear_window(g_mlx.mlx, g_mlx.mlx_wind);
 	y = 0;

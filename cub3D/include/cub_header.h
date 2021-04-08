@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/06 20:00:55 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:04:49 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,8 +223,8 @@ int		move_back(void);
 int		move_left(void);
 int		move_right(void);
 void	init_to_move(t_moving *to_move);
-void	get_sprites_pos(t_sprites **sprites);
-int		main_draw_sprite();
+void	get_sprites_pos(t_sprites *sprites);
+int		main_draw_sprite(t_for_loop_list *list);
 
 /*global variables here*/
 int g_ready_to_read_map;

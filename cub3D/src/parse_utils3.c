@@ -6,13 +6,13 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/06 20:01:08 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:58:33 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub_header.h"
 
-void	get_sprites_pos(t_sprites **sprites)
+void	get_sprites_pos(t_sprites *sprites)
 {
 	int i;
 	int j;
@@ -24,21 +24,21 @@ void	get_sprites_pos(t_sprites **sprites)
 	{
 		j = -1;
 		while (++j < g_config.map_width && sp_num < g_config.sprite_num)
-			if (g_config.map[i][j] == 2)
+			if (g_config.map[i][j] == '2')
 			{
-				if (!(sprites[sp_num] = malloc(sizeof(t_sprites))))
-					print_cust_error(PROCESSING_ERROR);
-				sprites[0][sp_num].x = i;
-				sprites[0][sp_num].y = j;
+				// if (!(sprites[sp_num] = malloc(sizeof(t_sprites))))
+					// print_cust_error(PROCESSING_ERROR);
+				sprites[sp_num].x = j;
+				sprites[sp_num].y = i;
 				sp_num++;
 			}
 		i++;
 	}
 	i = -1;
 	while (++i < g_config.sprite_num)
-		sprites[0][i].dist_to_player = ((g_mlx.player.posx - sprites[0][i].x) *
-		(g_mlx.player.posx - sprites[0][i].x) + (g_mlx.player.posy - sprites[0][i].y)
-			* (g_mlx.player.posy - sprites[0][i].y));
+		sprites[i].dist_to_player = ((g_mlx.player.posx - sprites[i].x) *
+		(g_mlx.player.posx - sprites[i].x) + (g_mlx.player.posy - sprites[i].y)
+			* (g_mlx.player.posy - sprites[i].y));
 }
 
 void	compare_two_maps(char **map1, char **map2)

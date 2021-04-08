@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/06 18:00:50 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:51:45 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ static void		finding_wall(t_ray *ray)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if (g_config.map[ray->mapy][ray->mapx] == '1' ||
-			g_config.map[ray->mapy][ray->mapx] == '2')
+		if (g_config.map[ray->mapy][ray->mapx] == '1')
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -134,6 +133,7 @@ int				main_calc(t_for_loop_list *list)
 		buff_filling(list, &ray, x, &vars);
 		x++;
 	}
+	main_draw_sprite(list);
 	draw_to_screen(list->buff);
 	return (0);
 }
