@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:47:03 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/08 19:06:00 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:05:55 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	draw_sprites(t_sprites *sprites, t_for_loop_list *list)
 
 		int spriteHeight = (int)fabs((g_config.wind_heith  / transformY) / vDiv); 
 		int drawStartY = -spriteHeight / 2 + g_config.wind_heith / 2 + vMoveScreen;
-		if(drawStartY < 0) drawStartY = 0;
+		if(drawStartY < 0) 
+			drawStartY = 0;
 		int drawEndY = spriteHeight / 2 + g_config.wind_heith / 2 + vMoveScreen;
 		if(drawEndY >= g_config.wind_heith) drawEndY = g_config.wind_heith - 1;
 

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/08 18:58:33 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:15:10 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	get_sprites_pos(t_sprites *sprites)
 		while (++j < g_config.map_width && sp_num < g_config.sprite_num)
 			if (g_config.map[i][j] == '2')
 			{
-				// if (!(sprites[sp_num] = malloc(sizeof(t_sprites))))
-					// print_cust_error(PROCESSING_ERROR);
 				sprites[sp_num].x = j;
 				sprites[sp_num].y = i;
 				sp_num++;
