@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/10 18:20:42 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/11 17:51:45 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ static void		buff_filling(t_for_loop_list *list, t_ray *ray, int x,
 		vars->texy = (int)vars->texpos &
 			(list->textures[vars->texnum].height - 1);
 		vars->texpos += vars->step;
+		// list->buff[y][x] = 0;
 		list->buff[y][x] = list->textures[vars->texnum].buff
 			[list->textures[vars->texnum].height * vars->texy + vars->texx];
 		y++;
