@@ -1,4 +1,4 @@
-R 500, 500
+R 500,00000000000000500
 NO ./source/grass.xpm
 EA ./source/brick.xpm
 SO ./source/brick.xpm

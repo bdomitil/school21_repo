@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 15:49:39 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:26:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:27:07 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ bool			verify_color_parse(char *str)
 		}
 		i++;
 	}
-	if (commas != 2 || !just_numerics(&str[i]))
+	if (commas > 2 || !just_numerics(&str[i]))
 		print_cust_error(INVALID_COLOR);
 	return (true);
 }

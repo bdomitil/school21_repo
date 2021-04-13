@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/06 18:17:57 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:37:51 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,30 @@
 void			parse_resolution(char *str)
 {
 	int		i;
-	char	**splited_str;
-	int		screen_width;
-	int		screen_heith;
+	char	**sp_str;
+	int		sc_wd;
+	int		sc_hg;
 
 	i = 0;
-	splited_str = ft_split(&str[1], ',');
-	while (splited_str[i])
+	mlx_get_screen_size(&sc_wd, &sc_hg);
+	sp_str = ft_split(&str[1], ',');
+	while (sp_str[i])
 		i++;
-	if (i != 2)
+	if (i != 2 || !verify_color_parse(str))
 		print_cust_error(INVALID_RESOLUTION);
-	if (ft_atoi_long(splited_str[0]) <= 0 ||
-		ft_atoi_long(splited_str[1]) <= 0)
+	if (ft_atoi_long(sp_str[0]) <= 0 ||
+		ft_atoi_long(sp_str[1]) <= 0)
 		print_cust_error(INVALID_RESOLUTION);
-	mlx_get_screen_size(&screen_width, &screen_heith);
-	if (ft_atoi_long(splited_str[0]) > screen_width ||
-		ft_atoi_long(splited_str[0]) < 50)
-		g_config.wind_width = screen_width;
+	if (ft_atoi_long(sp_str[0]) > sc_wd || ft_atoi_long(sp_str[0]) < 50)
+		g_config.wind_width = sc_wd;
 	else
-		g_config.wind_width = ft_atoi_long(splited_str[0]);
-	if (ft_atoi_long(splited_str[1]) > screen_width ||
-		ft_atoi(splited_str[1]) < 50)
-		g_config.wind_heith = screen_heith;
+		g_config.wind_width = ft_atoi_long(sp_str[0]);
+	if (ft_atoi_long(sp_str[1]) > sc_wd ||
+		ft_atoi(sp_str[1]) < 50)
+		g_config.wind_heith = sc_hg;
 	else
-		g_config.wind_heith = ft_atoi(splited_str[1]);
-	free_double_mass((void **)splited_str, i);
+		g_config.wind_heith = ft_atoi(sp_str[1]);
+	free_double_mass((void **)sp_str, i);
 }
 
 void			parse_pathes(char *str, t_read_in_map readinmap)
@@ -97,10 +96,10 @@ void			parse_color(char *str, t_read_in_map readinmap)
 
 void			verify_map_contour(void)
 {
-	int i;
-	int j;
-	int width;
-	char **temp_map;
+	int		i;
+	int		j;
+	int		width;
+	char	**temp_map;
 
 	i = 0;
 	j = 0;

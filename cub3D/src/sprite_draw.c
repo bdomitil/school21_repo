@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:47:03 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:48:35 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:39:51 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void		draw_sprites(t_sprites *sprites, t_for_loop_list *list)
 	int				i;
 	t_sprite_vars	vars;
 
-	i = 0;
-	while (i < g_config.sprite_num)
+	i = -1;
+	while (++i < g_config.sprite_num)
 	{
 		vars.x = sprites[i].x - g_mlx.player.posx;
 		vars.y = sprites[i].y - g_mlx.player.posy;
@@ -107,7 +107,6 @@ void		draw_sprites(t_sprites *sprites, t_for_loop_list *list)
 			vars.drawendx = g_config.wind_width - 1;
 		vars.stripe = vars.drawstartx;
 		get_sprite_color_in_loop(&vars, list);
-		i++;
 	}
 }
 

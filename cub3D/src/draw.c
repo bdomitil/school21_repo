@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:44:34 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:56:59 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	texture_to_image(t_texture *textures, char *path, int tex_num)
 {
-	t_image image;
-	int y;
-	int x;
+	t_image	image;
+	int		y;
+	int		x;
 
 	y = 0;
 	if (!(image.img = mlx_xpm_file_to_image(g_mlx.mlx, path,
 			&image.width, &image.height)))
 		print_cust_error(INVALID_TEXTURE);
-	image.addr = (int *) mlx_get_data_addr(image.img, &image.bpp,
+	image.addr = (int *)mlx_get_data_addr(image.img, &image.bpp,
 			&image.line_length, &image.endian);
-	if(!(textures[tex_num].buff = ft_calloc(sizeof(int),
+	if (!(textures[tex_num].buff = ft_calloc(sizeof(int),
 				(image.width * image.height))))
 		print_cust_error(PROCESSING_ERROR);
 	while (y < image.height)
@@ -39,22 +39,20 @@ void	texture_to_image(t_texture *textures, char *path, int tex_num)
 	textures[tex_num].height = image.height;
 }
 
-void mlx_draw(void)
+void	mlx_draw(void)
 {
 	int				i;
 	int				j;
 	t_for_loop_list	list;
-	
-	i = 0;
+
+	i = -1;
 	j = 0;
 	if (!(list.buff = (int **)ft_calloc(sizeof(int*), g_config.wind_heith)))
 		print_cust_error(PROCESSING_ERROR);
-	while (i < g_config.wind_heith)
-	{
-		if(!(list.buff[i] = (int *)ft_calloc(sizeof(int), g_config.wind_width)))
+	while (++i < g_config.wind_heith)
+		if (!(list.buff[i] = (int *)ft_calloc(sizeof(int),
+			g_config.wind_width)))
 			print_cust_error(PROCESSING_ERROR);
-		i++;
-	}
 	i = 0;
 	if (!(list.textures = (t_texture*)ft_calloc(sizeof(t_texture), 5)))
 		print_cust_error(PROCESSING_ERROR);

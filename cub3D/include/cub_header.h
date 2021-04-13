@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:31:35 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:21:32 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ typedef struct	s_config
 
 bool	config_parser(char *file_name);
 void	print_cust_error(t_errors error);
-void	init_glob_vars();
+void	init_glob_vars(void);
 void	parse_resolution(char *str);
 void	parse_pathes(char *str, t_read_in_map readinmap);
 void	parse_color(char *str, t_read_in_map readinmap);
@@ -218,7 +218,6 @@ bool	verify_color_parse(char *str);
 void	flood_fill(int i, int j, int width);
 int		count_map_heigth(char **map);
 void	check_player(bool *player,char q);
-void	print_map(); //delete before finish
 void	verify_map_contour(void);
 void	free_double_mass(void **mass, int mass_heigth);
 char	**dublicate_map(char **mass, char filling);

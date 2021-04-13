@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 16:46:20 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/08 18:49:07 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 21:51:04 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	draw_to_screen(int **buff)
 {
 	int y;
 	int x;
-	
-	
+
 	mlx_clear_window(g_mlx.mlx, g_mlx.mlx_wind);
 	y = 0;
 	while (y < g_config.wind_heith)
@@ -35,7 +34,8 @@ void	draw_to_screen(int **buff)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(g_mlx.mlx, g_mlx.mlx_wind, g_mlx.mlx_image.img, 0, 0);
+	mlx_put_image_to_window(g_mlx.mlx, g_mlx.mlx_wind,
+					g_mlx.mlx_image.img, 0, 0);
 }
 
 void	prepare_textures(t_texture *textures)
@@ -66,9 +66,9 @@ int		fill_celling(int **buff, int drawstart, int x)
 void	fill_floor(int **buff, int x, int y)
 {
 	while (y < g_config.wind_heith)
-		{
-			buff[y][x] = rgb_color_to_int(g_config.f_color[0], g_config.f_color[1], g_config.f_color[2]);
-			y++;
-		}
+	{
+		buff[y][x] = rgb_color_to_int(g_config.f_color[0],
+			g_config.f_color[1], g_config.f_color[2]);
+		y++;
+	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:36:55 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:26:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 22:41:11 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	compare_two_maps(char **map1, char **map2)
 		{
 			if (map1[i][j] == '0' &&
 				map2[i][j] != '0')
-			print_cust_error(INVALID_MAP);
+				print_cust_error(INVALID_MAP);
 			else if (map1[i][j] == '2' &&
 				map2[i][j] != '2')
-			print_cust_error(INVALID_MAP);
+				print_cust_error(INVALID_MAP);
 			else if (map1[i][j] == g_config.man &&
 				map2[i][j] != g_config.man)
-			print_cust_error(INVALID_MAP);
+				print_cust_error(INVALID_MAP);
 			j++;
 		}
 		j = 0;
@@ -91,11 +91,11 @@ char	**dublicate_map(char **mass, char filling)
 		print_cust_error(ERROR_MAP_PROCESSING);
 	while (i < g_config.map_height)
 	{
-		if (!(to_ret[i] = ft_calloc(1 ,g_config.map_width + 1)))
+		if (!(to_ret[i] = ft_calloc(1, g_config.map_width + 1)))
 			print_cust_error(ERROR_MAP_PROCESSING);
 		ft_memset(to_ret[i], filling, g_config.map_width);
 		ft_strcpy(to_ret[i], mass[i]);
 		i++;
 	}
-	return to_ret;
+	return (to_ret);
 }

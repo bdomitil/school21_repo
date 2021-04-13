@@ -6,12 +6,12 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/04/13 20:34:39 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/04/13 22:19:18 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 files.c = src/cub_utils1.c src/config_parser.c src/parse_utils.c src/parse_utils2.c  \
-src/flood_fill.c src/test_utils.c src/parse_utils3.c src/cub.c src/ft_mlx_start.c  \
+src/flood_fill.c src/parse_utils3.c src/cub.c src/ft_mlx_start.c  \
 src/casting_utils.c src/draw.c src/draw_text_walls.c src/drawing_utils.c src/moving_utils.c  \
 src/key_utils.c src/sprite_draw.c	
 
