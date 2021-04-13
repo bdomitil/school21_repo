@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/08 18:39:55 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:44:34 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void mlx_draw(void)
 		i++;
 	}
 	i = 0;
-	if (!(list.textures = (t_texture*)malloc(sizeof(t_texture) * 5)))
+	if (!(list.textures = (t_texture*)ft_calloc(sizeof(t_texture), 5)))
 		print_cust_error(PROCESSING_ERROR);
-	if (!(list.zbuff = malloc(sizeof(int) * g_config.wind_width)))
+	if (!(list.zbuff = ft_calloc(sizeof(double), g_config.wind_width)))
 		print_cust_error(PROCESSING_ERROR);
 	prepare_textures(list.textures);
 	init_to_move(&list.to_move);

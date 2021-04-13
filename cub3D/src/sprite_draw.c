@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:47:03 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/12 22:14:11 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:48:35 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,5 @@ void		main_draw_sprite(t_for_loop_list *list)
 	get_sprites_pos(sprites);
 	sort_sprites(sprites);
 	draw_sprites(sprites, list);
-	// free(sprites);
+	free(sprites);
 }
