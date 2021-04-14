@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 22:21:32 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:54:07 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ typedef enum	e_errors
 	INVALID_PLAYER,
 	ERROR_MAP_PROCESSING,
 	PROCESSING_ERROR,
-	INVALID_TEXTURE
+	INVALID_TEXTURE,
+	ERROR_SCREENSAVE
 }				t_errors;
 
 static char	*g_cust_errors[] = {"INVALID_NUMBER_OF_ARGUMENTS",
 	"ERROR IN OPENING MAP", "INVALID MAP", "INVALID RESOLUTION",
 	"ERROR IN PATH TO SOMETHING IN CONFIG", "INVALID COLOR", 
 	"WRONG NUMBER OF PLAYERS", "ERROR PROCESSING MAP", "PROCESSING ERROR", 
-	"NOT VALID TEXTURE FILE"};
+	"NOT VALID TEXTURE FILE", "ERROR WHILE MAKING SCREENSHOT"};
 /*end of part*/
 
 
@@ -204,6 +205,7 @@ typedef struct	s_config
 	int		map_width;
 	char	man;
 	int		sprite_num;
+	bool	screeshot_need;
 }				t_config;
 
 bool	config_parser(char *file_name);
@@ -246,6 +248,7 @@ int		move_right(void);
 void	init_to_move(t_moving *to_move);
 void	get_sprites_pos(t_sprites *sprites);
 void	main_draw_sprite(t_for_loop_list *list);
+void	screen_save(t_for_loop_list *list);
 
 /*global variables here*/
 int g_ready_to_read_map;

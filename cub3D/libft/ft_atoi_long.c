@@ -6,13 +6,13 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 18:48:38 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/02/24 20:11:15 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 20:07:23 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_sym(char q, int *sym)
+static int		is_sym(char q, int *sym)
 {
 	if (q == '-' || q == '+')
 	{

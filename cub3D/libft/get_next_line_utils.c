@@ -6,22 +6,22 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 02:38:11 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/03/21 14:03:19 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 20:03:26 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t  gnl_strlen(const char *str)
+size_t	gnl_strlen(const char *str)
 {
-        size_t  i;
+	size_t	i;
 
-        if (str == NULL)
-                return (0);
-        i = 0;
-        while (str[i] != '\0' && str[i] != EOF)
-                i++;
-        return (i);
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0' && str[i] != EOF)
+		i++;
+	return (i);
 }
 
 char	*gnl_substr(char const *s, unsigned int start, int len)

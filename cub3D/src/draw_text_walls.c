@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 18:51:13 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 20:44:13 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:14:10 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int				main_calc(t_for_loop_list *list)
 		x++;
 	}
 	main_draw_sprite(list);
-	draw_to_screen(list->buff);
+	if (!g_config.screeshot_need)
+		draw_to_screen(list->buff);
 	return (0);
 }

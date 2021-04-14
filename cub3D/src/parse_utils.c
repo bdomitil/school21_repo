@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 20:39:50 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 22:37:51 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:08:04 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void			parse_resolution(char *str)
 		i++;
 	if (i != 2 || !verify_color_parse(str))
 		print_cust_error(INVALID_RESOLUTION);
-	if (ft_atoi_long(sp_str[0]) <= 0 ||
-		ft_atoi_long(sp_str[1]) <= 0)
+	if (ft_atoi_long(sp_str[0]) <= 0 || ft_atoi_long(sp_str[1]) <= 0)
 		print_cust_error(INVALID_RESOLUTION);
-	if (ft_atoi_long(sp_str[0]) > sc_wd || ft_atoi_long(sp_str[0]) < 50)
+	if ((ft_atoi_long(sp_str[0]) > sc_wd || ft_atoi_long(sp_str[0]) < 50)
+		& !g_config.screeshot_need)
 		g_config.wind_width = sc_wd;
 	else
 		g_config.wind_width = ft_atoi_long(sp_str[0]);
-	if (ft_atoi_long(sp_str[1]) > sc_wd ||
-		ft_atoi(sp_str[1]) < 50)
+	if ((ft_atoi_long(sp_str[1]) > sc_wd || ft_atoi(sp_str[1]) < 50)
+		& !g_config.screeshot_need)
 		g_config.wind_heith = sc_hg;
 	else
 		g_config.wind_heith = ft_atoi(sp_str[1]);

@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/13 21:56:59 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:54:31 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void	mlx_draw(void)
 	if (!(list.zbuff = ft_calloc(sizeof(double), g_config.wind_width)))
 		print_cust_error(PROCESSING_ERROR);
 	prepare_textures(list.textures);
+	if (g_config.screeshot_need)
+	{
+		main_calc(&list);
+		screen_save(&list);
+		exit(0);
+	}
 	init_to_move(&list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 3, 0, &key_release_event, &list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, &list.to_move);
