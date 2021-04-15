@@ -6,7 +6,7 @@
 #    By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/22 19:13:25 by bdomitil          #+#    #+#              #
-#    Updated: 2021/04/14 22:56:28 by bdomitil         ###   ########.fr        #
+#    Updated: 2021/04/15 17:02:09 by bdomitil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ src/flood_fill.c src/parse_utils3.c src/cub.c src/ft_mlx_start.c  \
 src/casting_utils.c src/draw.c src/draw_text_walls.c src/drawing_utils.c src/moving_utils.c  \
 src/key_utils.c src/sprite_draw.c src/screen_save.c
 
-# CFLAGS = -g -Wall -Wextra -Werror					
-CFLAGS = -g
+CFLAGS = -g -Wall -Wextra -Werror
+# CFLAGS = -g
 # MlxFlags = -Lmlx/ -lmlx -framework OpenGL -framework AppKit 
 MlxFlags = -framework OpenGL -framework AppKit
 files.o = $(files.c:.c=.o)
@@ -24,19 +24,19 @@ files.o = $(files.c:.c=.o)
 NAME = cub3D
 
 
-all :	$(NAME)
+all :	$(NAME) lib_compil mlx_compil
 
-$(NAME) : $(files.o) lib_compil mlx_compil
-		gcc $(CFLAGS) $(MlxFlags) $(files.c) libft/libft.a minilibx/libmlx.a -o cub3D 
+$(NAME) : $(files.o) include/cub_header.h
+		gcc $(CFLAGS) $(MlxFlags) $(files.o) libft/libft.a minilibx/libmlx.a -o cub3D
 		@echo "\033[7m CUB PROGRAM IS READY TO BE USED!\033[0m"
 
 
 lib_compil:
-		#@make -C libft/
+		@make -C libft/
 
-mlx_compil:
-		#@make -C minilibx/
-		
+mlx_compil: 
+		@make -C minilibx/
+
 %.o : %.c 
 		@gcc $(CFLAGS)  -c  $<  -o $@
 		@echo "\033[36m$<\033[0m \033[35m is compiled!\033[0m"

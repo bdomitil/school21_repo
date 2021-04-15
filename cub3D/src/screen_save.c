@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 22:13:46 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/14 23:27:33 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:05:38 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	fill_header(int fd)
 {
 	unsigned char	header[14];
-	int		count;
-	int res;
+	int				count;
+	int				res;
 
 	ft_memset(header, 0, 14);
 	header[0] = (unsigned char)('B');
 	header[1] = (unsigned char)('M');
-	count = g_mlx.mlx_image.height * g_mlx.mlx_image.width
+	count = g_config.wind_heith * g_config.wind_width
 		* g_mlx.mlx_image.bpp / 8 + 54;
 	header[2] = (unsigned char)(count);
 	header[3] = (unsigned char)(count >> 8);
@@ -35,17 +35,17 @@ static void	fill_header(int fd)
 static void	fill_header_info(int fd)
 {
 	unsigned char	header[40];
-	int		count;
-	int res;
+	int				count;
+	int				res;
 
 	ft_memset(header, 0, 40);
 	header[0] = (unsigned char)(40);
-	count= g_mlx.mlx_image.width;
+	count = g_config.wind_width;
 	header[4] = (unsigned char)(count);
 	header[5] = (unsigned char)(count >> 8);
 	header[6] = (unsigned char)(count >> 16);
 	header[7] = (unsigned char)(count >> 24);
-	count = g_mlx.mlx_image.height;
+	count = g_config.wind_heith;
 	header[8] = (unsigned char)(count);
 	header[9] = (unsigned char)(count >> 8);
 	header[10] = (unsigned char)(count >> 16);
@@ -58,40 +58,48 @@ static void	fill_header_info(int fd)
 
 static void	fill_pixels(int fd, int **buff)
 {
-	int i;
-	int res;
-	int j;
-	int k;
-	int skip;
+	int		i;
+	int		j;
+	int		k;
+	char	current_pix;
+	int		skip;
 
 	i = g_config.wind_heith;
-	skip = 0;
-	while (i >= 0)
+	while (--i >= 0)
 	{
-		j = 0;
-		while (j < g_config.wind_width)
+		j = -1;
+		while (++j < g_config.wind_width)
 		{
-				if ( (res = write(fd, &buff[i][j], 4)) == -1)
-					print_cust_error(ERROR_SCREENSAVE);
-		
-			j++;
-		
+			k = 0;
+			skip = 0;
+			while (k < 4)
+			{
+				current_pix = ((buff[i][j]) >> skip);
+				write(fd, &current_pix, 1);
+				k++;
+				skip += 8;
+			}
 		}
-		i--;
 	}
 }
 
-void	screen_save(t_for_loop_list *list)
+void		screen_save(t_for_loop_list *list)
 {
-	int fd;
-	char *filename;
+	int		fd;
+	char	*filename;
 
-	filename = "screenshot.bmp";
-	if ((fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0722)) > 0)
+	if (g_config.screeshot_need)
 	{
-		fill_header(fd);
-		fill_header_info(fd);
-		fill_pixels(fd, list->buff);
-		close(fd);
+		filename = "screenshot.bmp";
+		main_calc(list);
+		if ((fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0722)) > 0)
+		{
+			fill_header(fd);
+			fill_header_info(fd);
+			fill_pixels(fd, list->buff);
+			close(fd);
+		}
+		exit(0);
 	}
+	return ;
 }

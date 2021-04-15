@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 22:21:00 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/12 22:12:38 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:21:29 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,9 @@ void		player_configurate(int posx, int posy)
 		g_mlx.player.planex = 0.66;
 		g_mlx.player.planey = 0;
 	}
+}
+
+int			close_window(void)
+{
+	exit(0);
 }
