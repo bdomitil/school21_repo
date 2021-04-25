@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:45:42 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/15 17:21:36 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:13:59 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	mlx_draw(void)
 	prepare_textures(list.textures);
 	screen_save(&list);
 	init_to_move(&list.to_move);
+	mlx_hook(g_mlx.mlx_wind, 10, 0, &release_after_focus_out, &list.to_move);
+	mlx_hook(g_mlx.mlx_wind, 9, 0, &release_after_focus_out, &list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 3, 0, &key_release_event, &list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 2, 0, &key_press_event, &list.to_move);
 	mlx_hook(g_mlx.mlx_wind, 17, 0, &close_window, NULL);

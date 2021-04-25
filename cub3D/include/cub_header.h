@@ -6,7 +6,7 @@
 /*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 18:37:43 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/04/15 17:17:10 by bdomitil         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:02:29 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,7 @@ void				get_sprites_pos(t_sprites *sprites);
 void				main_draw_sprite(t_for_loop_list *list);
 void				screen_save(t_for_loop_list *list);
 int					close_window(void);
+int					release_after_focus_out(t_moving *to_move);
 
 int					g_ready_to_read_map;
 t_config			g_config;
